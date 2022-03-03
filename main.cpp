@@ -16,7 +16,7 @@ int main() {
 
     TiXmlElement* root = doc.FirstChildElement();
     if(root == NULL) {
-
+        std::cout << " Joe (Biden) Mama \n";
     }
 
     Monke* randomshit = new Monke;
