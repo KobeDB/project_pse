@@ -6,7 +6,7 @@ struct Monke {
 };
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    std::cout << "Hello, World! monke boi!" << std::endl;
 
     TiXmlDocument doc;
     if(!doc.LoadFile("test.xml")) {
