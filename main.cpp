@@ -2,6 +2,7 @@
 #include <sstream>
 #include <map>
 #include <vector>
+#include <unistd.h>
 #include "tinyxml.h"
 
 #include "Verkeerslicht.h"
@@ -149,7 +150,17 @@ int main() {
     }
 
     Verkeerssimulatie simulatie(banen, verkeerslichten, voertuigen);
+    std::cout << "SIMULATIE: \n";
     std::cout << simulatie << "\n";
+    float time = 0;
+    for(int i = 0; i < 15; i++) {
+        float deltaTime_s = 1;
+        usleep((int)(deltaTime_s * 1000000));
+        time += deltaTime_s;
+        simulatie.update(deltaTime_s);
+        std::cout << "\tTijd: " << time << "\n";
+        std::cout << simulatie << "\n";
+    }
 
     return 0;
 }

@@ -4,6 +4,8 @@
 
 #include "Vekeerssimulatie.h"
 
+#include <algorithm>
+
 void Verkeerssimulatie::addVerkeerslicht(const Verkeerslicht& licht)
 {
     verkeerslichten.push_back(licht);
@@ -14,15 +16,20 @@ void Verkeerssimulatie::addBaan(const Baan &baan) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Verkeerssimulatie &sim) {
-    os << "SIMULATIE: \n";
-    os << "\tTijd: " << "0" << "\n";
+
+//    for(int i = 0; i < sim.voertuigen.size(); i++) {
+//        os << "\tVoertuig " << (i+1) << "\n";
+//        os << "\t\t-> baan: " << sim.voertuigen[i].getBaanNaam() << "\n";
+//        os << "\t\t-> positie: " << sim.voertuigen[i].getPositie() << "\n";
+//        os << "\t\t-> snelheid: " << sim.voertuigen[i].getSnelheid() << "\n";
+//    }
 
     for(int i = 0; i < sim.voertuigen.size(); i++) {
         os << "\tVoertuig " << (i+1) << "\n";
-        os << "\t\t-> baan: " << sim.voertuigen[i].getBaanNaam() << "\n";
-        os << "\t\t-> positie: " << sim.voertuigen[i].getPositie() << "\n";
-        os << "\t\t-> snelheid: " << sim.voertuigen[i].getSnelheid() << "\n";
+        os << sim.voertuigen[i] << "\n";
     }
+
+    return os;
 }
 
 Verkeerssimulatie::Verkeerssimulatie(const std::vector<Baan> &pBanen, const std::vector<Verkeerslicht> &pLichten,
@@ -40,5 +47,19 @@ Verkeerssimulatie::Verkeerssimulatie(const std::vector<Baan> &pBanen, const std:
         }
     }
     std::cout << "";
+
+}
+
+void Verkeerssimulatie::update(float deltaTime_s)
+{
+    // We lopen de lijst van achter naar voren af, omdat we de lijst ondertussen bewerken
+    for(int i = voertuigen.size()-1; i >= 0; i--) {
+        Voertuig& tuig = voertuigen[i];
+        const Baan& baanVanTuig = banen[tuig.getBaanNaam()];
+        tuig.update(deltaTime_s, baanVanTuig);
+        if(tuig.getPositie() > baanVanTuig.getLengte()) {
+            voertuigen.erase(voertuigen.begin() + i);
+        }
+    }
 
 }
