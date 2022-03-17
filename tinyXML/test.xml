@@ -1,8 +1,40 @@
-<CD>
-    <TITLE>Empire Burlesque</TITLE>
-    <ARTIST>Bob Dylan</ARTIST>
-    <COUNTRY>USA</COUNTRY>
-    <COMPANY>Columbia</COMPANY>
-    <PRICE>10.90</PRICE>
-    <YEAR>1985</YEAR>
-</CD>
+<?xml version="1.0" ?>
+<VERKEERSSITUATIE>
+    <BAAN>
+        <naam>Middelheimlaan</naam>
+        <lengte>500</lengte>
+    </BAAN>
+    <VERKEERSLICHT>
+        <baan>Middelheimlaan</baan>
+        <positie>400</positie>
+        <cyclus>20</cyclus>
+    </VERKEERSLICHT>
+    <VERKEERSLICHT>
+        <baan>Middelheimlaan</baan>
+        <positie>300</positie>
+        <cyclus>20</cyclus>
+    </VERKEERSLICHT>
+    <VERKEERSLICHT>
+        <baan>Middelheimlaan</baan>
+        <positie>350</positie>
+        <cyclus>20</cyclus>
+    </VERKEERSLICHT>
+    <VERKEERSLICHT>
+        <baan>Middelheimlaan</baan>
+        <positie>440</positie>
+        <cyclus>20</cyclus>
+    </VERKEERSLICHT>
+    <VERKEERSLICHT>
+        <baan>Groenenborgerlaan</baan>
+        <positie>440</positie>
+        <cyclus>20</cyclus>
+    </VERKEERSLICHT>
+    <VOERTUIG>
+        <baan>Middelheimlaan</baan>
+        <positie>20</positie>
+    </VOERTUIG>
+    <VOERTUIG>
+        <baan>Middelheimlaan</baan>
+        <positie>0</positie>
+    </VOERTUIG>
+</VERKEERSSITUATIE>

@@ -10,4 +10,4 @@ add_executable( project_pse main.cpp
         tinyxml.h
         tinyxml.cpp
         tinyxmlparser.cpp
-        )
+        Baan.cpp Baan.h Verkeerslicht.cpp Verkeerslicht.h Vekeerssimulatie.cpp Vekeerssimulatie.h Voertuig.cpp Voertuig.h)
