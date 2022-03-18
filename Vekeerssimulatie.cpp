@@ -11,11 +11,13 @@ void Verkeerssimulatie::addVerkeerslicht(const Verkeerslicht& licht)
     verkeerslichten.push_back(licht);
 }
 
-void Verkeerssimulatie::addBaan(const Baan &baan) {
+void Verkeerssimulatie::addBaan(const Baan &baan)
+{
     banen[baan.getNaam()] = baan;
 }
 
-std::ostream &operator<<(std::ostream &os, const Verkeerssimulatie &sim) {
+std::ostream &operator<<(std::ostream &os, const Verkeerssimulatie &sim)
+{
 
 //    for(int i = 0; i < sim.voertuigen.size(); i++) {
 //        os << "\tVoertuig " << (i+1) << "\n";
@@ -52,6 +54,11 @@ Verkeerssimulatie::Verkeerssimulatie(const std::vector<Baan> &pBanen, const std:
 
 void Verkeerssimulatie::update(float deltaTime_s)
 {
+    for(int i = 0; i < verkeerslichten.size(); i++) {
+        Verkeerslicht& licht = verkeerslichten[i];
+        licht.update(deltaTime_s);
+    }
+
     // We lopen de lijst van achter naar voren af, omdat we de lijst ondertussen bewerken
     for(int i = voertuigen.size()-1; i >= 0; i--) {
         Voertuig& tuig = voertuigen[i];

@@ -23,6 +23,8 @@ public:
     const std::string& getNaam() const {return naam;}
     int getLengte() const {return lengte;}
 
+    const Verkeerslicht* getVolgendeLicht(int pos) const;
+
     void addVerkeerslicht(Verkeerslicht& licht);
 };
 

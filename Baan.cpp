@@ -24,3 +24,12 @@ void Baan::addVerkeerslicht(Verkeerslicht &licht)
     }
     lichten.push_back(&licht);
 }
+
+const Verkeerslicht *Baan::getVolgendeLicht(int pos) const {
+    for(int i = 0; i < lichten.size(); i++) {
+        Verkeerslicht* licht = lichten[i];
+        if(pos < licht->getPositie()) // We nemen meteen dit licht omdat onze lichten volgens afstand gesorteerd zijn
+            return licht;
+    }
+    return NULL;
+}
