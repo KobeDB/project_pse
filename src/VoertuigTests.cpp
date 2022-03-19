@@ -62,6 +62,7 @@ TEST_F(VoertuigTest, HappyDayZonderLichten) {
     EXPECT_NEAR(voertuig.getPositie(), 20, 1);
     EXPECT_NEAR(voertuig.getSnelheid(), 10, 1);
     EXPECT_NEAR(voertuig.getVersnelling(), 1.25, 1);
+    //
 
 
 }
