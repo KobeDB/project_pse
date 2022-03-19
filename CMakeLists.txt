@@ -29,8 +29,7 @@ set(RELEASE_SOURCE_FILES
         src/Voertuig.cpp
         src/Voertuig.h src/VerkeerssituatieReader.cpp src/VerkeerssituatieReader.h
         src/TicTacToeUtils.cpp
-        src/TicTacToeUtils.h
-        )
+        src/TicTacToeUtils.h)
 
 # Set source files for RELEASE target
 set(DEBUG_SOURCE_FILES
@@ -52,7 +51,7 @@ set(DEBUG_SOURCE_FILES
         src/VerkeerssituatieReader.cpp src/VerkeerssituatieReader.h
         src/TicTacToeUtils.cpp
         src/TicTacToeUtils.h
-        )
+        src/VoertuigTests.cpp)
 
 # Create RELEASE target
 add_executable(project_pse ${RELEASE_SOURCE_FILES})

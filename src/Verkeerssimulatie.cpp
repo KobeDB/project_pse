@@ -65,12 +65,16 @@ void Verkeerssimulatie::update(float deltaTime_s)
     for(int i = voertuigen.size()-1; i >= 0; i--) {
         Voertuig& tuig = voertuigen[i];
         const Baan& baanVanTuig = banen[tuig.getBaanNaam()];
-        tuig.update(deltaTime_s, baanVanTuig);
+        tuig.update(deltaTime_s, banen);
         if(tuig.getPositie() > baanVanTuig.getLengte()) {
             voertuigen.erase(voertuigen.begin() + i);
         }
     }
 
+}
+
+bool Verkeerssimulatie::done() const {
+    return voertuigen.empty();
 }
 
 //int tryParseInt(const std::string& s, bool& success)

@@ -26,6 +26,7 @@ public:
     void addBaan(const Baan& baan);
 
     void update(float deltaTime_s);
+    bool done() const;
 
     friend std::ostream& operator<<(std::ostream& os, const Verkeerssimulatie& sim);
 };

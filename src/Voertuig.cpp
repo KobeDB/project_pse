@@ -5,10 +5,13 @@
 #include "Voertuig.h"
 #include <cmath>
 
+#include "Baan.h"
+
 using namespace std;
 
-void Voertuig::update(float deltaTime_s, const Baan& baan)
+void Voertuig::update(float deltaTime_s, const std::map<std::string, Baan>& banen)
 {
+    const Baan& baan = banen.at(baanNaam);
     const Verkeerslicht* licht = baan.getVolgendeLicht(positie);
 
     float nieuweSnelheid = snelheid + deltaTime_s * versnelling;
@@ -35,8 +38,6 @@ void Voertuig::update(float deltaTime_s, const Baan& baan)
     else {
         snelheid_max = V_MAX;
     }
-
-
 
 }
 

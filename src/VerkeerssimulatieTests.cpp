@@ -15,6 +15,7 @@ using namespace std;
 
 #include "Verkeerssimulatie.h"
 #include "VerkeerssimulatieInputTests.cpp"
+#include "Voertuig.h"
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);

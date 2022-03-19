@@ -49,6 +49,7 @@ TEST_F(VerkeerssimulatieInputTest, HappyDay) {
     ofstream ofs("happyDayError.txt");
     ostringstream oss;
     VerkeerssituatieReader reader("reader_tests/input/happyDay.xml", oss);
+    ASSERT_TRUE(oss.str().size() == 0); // Asserteer dat er geen errors waren
 
     std::vector<Baan> banen = reader.getBanen();
     ASSERT_TRUE(banen.size() == 1);
