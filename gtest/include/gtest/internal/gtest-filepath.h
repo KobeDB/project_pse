@@ -81,7 +81,7 @@ class GTEST_API_ FilePath {
   static FilePath GetCurrentDir();
 
   // Given directory = "dir", base_name = "test", number = 0,
-  // extension = "xml", returns "dir/test.xml". If number is greater
+  // extension = "xml", returns "dir/happyDay.xml". If number is greater
   // than zero (e.g., 12), returns "dir/test_12.xml".
   // On Windows platform, uses \ as the separator rather than /.
   static FilePath MakeFileName(const FilePath& directory,
@@ -89,8 +89,8 @@ class GTEST_API_ FilePath {
                                int number,
                                const char* extension);
 
-  // Given directory = "dir", relative_path = "test.xml",
-  // returns "dir/test.xml".
+  // Given directory = "dir", relative_path = "happyDay.xml",
+  // returns "dir/happyDay.xml".
   // On Windows, uses \ as the separator rather than /.
   static FilePath ConcatPaths(const FilePath& directory,
                               const FilePath& relative_path);

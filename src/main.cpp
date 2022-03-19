@@ -21,7 +21,7 @@ int main() {
     vector<Baan> banen;
     vector<Verkeerslicht> lichten;
     vector<Voertuig> voertuigen;
-//    readVerkeerssituatieFromXml("test.xml", banen, lichten, voertuigen);
+//    readVerkeerssituatieFromXml("happyDay.xml", banen, lichten, voertuigen);
 
     Verkeerssimulatie simulatie(banen, lichten, voertuigen);
     std::cout << "SIMULATIE: \n";

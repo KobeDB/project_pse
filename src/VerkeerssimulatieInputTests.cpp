@@ -37,7 +37,6 @@ protected:
     }
 
     // Declares the variables your tests want to use.
-    Verkeerssimulatie* simulatie;
 };
 
 // Tests the default constructor.
@@ -47,18 +46,23 @@ TEST_F(VerkeerssimulatieInputTest, DefaultConstructor) {
 
 // Tests the "happy day" scenario
 TEST_F(VerkeerssimulatieInputTest, HappyDay) {
+    ofstream ofs("happyDayError.txt");
+    ostringstream oss;
+    VerkeerssituatieReader reader("reader_tests/input/happyDay.xml", oss);
+
+    std::vector<Baan> banen = reader.getBanen();
+    ASSERT_TRUE(banen.size() == 1);
+    EXPECT_TRUE(banen[0].getNaam() == "Middelheimlaan");
+    EXPECT_TRUE(banen[0].getLengte() == 600);
+
+    std::vector<Verkeerslicht> lichten = reader.getVerkeerslichten();
+    ASSERT_TRUE(lichten.size() == 1);
+    EXPECT_TRUE(lichten[0].getBaanNaam() == banen[0].getNaam());
+    EXPECT_TRUE(lichten[0].getPositie() == 450);
+    EXPECT_TRUE(lichten[0].getCyclus() == 10);
 }
 
-TEST_F(VerkeerssimulatieInputTest, CornerCases) {
-    std::string inputFilesPath =  "reader_tests/input/";
-    std::string outputFilesPath = "reader_tests/output/";
-
-    std::ofstream ofs("reader_tests/output/out_test_no_root.xml");
-    VerkeerssituatieReader("reader_tests/input/illegalVerkeerssituatie1.xml", ofs);
-
-}
-
-TEST_F(VerkeerssimulatieInputTest, InputIllegalGames) {
+TEST_F(VerkeerssimulatieInputTest, InputIllegalVerkeerssituaties) {
     std::string inputDir = "reader_tests/input/";
     ASSERT_TRUE(DirectoryExists(inputDir));
 
