@@ -2,8 +2,8 @@
 // Created by kobedb on 17.03.22.
 //
 
-#ifndef PROJECT_PSE_VEKEERSSIMULATIE_H
-#define PROJECT_PSE_VEKEERSSIMULATIE_H
+#ifndef PROJECT_PSE_VERKEERSSIMULATIE_H
+#define PROJECT_PSE_VERKEERSSIMULATIE_H
 
 #include <map>
 #include <vector>
@@ -28,8 +28,10 @@ public:
     void update(float deltaTime_s);
 
     friend std::ostream& operator<<(std::ostream& os, const Verkeerssimulatie& sim);
-
 };
 
+void readVerkeerssituatieFromXml(const std::string& xmlFile, std::vector<Baan>& banen, std::vector<Verkeerslicht>& verkeerslichten, std::vector<Voertuig>& voertuigen);
 
-#endif //PROJECT_PSE_VEKEERSSIMULATIE_H
+
+
+#endif //PROJECT_PSE_VERKEERSSIMULATIE_H

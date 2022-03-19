@@ -28,7 +28,7 @@ private:
 
 public:
     Voertuig(const std::string &baanNaam, int positie)
-    : baanNaam(baanNaam), positie(positie), snelheid(0), versnelling(10), snelheid_max(16.6) {}
+        : baanNaam(baanNaam), positie(positie), snelheid(0), versnelling(10), snelheid_max(16.6) {}
 
     const std::string& getBaanNaam() const {return baanNaam;}
     int getPositie() const {return positie;}

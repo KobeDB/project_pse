@@ -1,0 +1,1 @@
+ERROR: VOERTUIG:POSITIE is geen getal
