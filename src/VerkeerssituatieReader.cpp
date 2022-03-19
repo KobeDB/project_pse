@@ -22,6 +22,31 @@ int tryParseInt(const std::string& s, bool& success)
 
 VerkeerssituatieReader::VerkeerssituatieReader(std::string situatieFile, std::ostream &errstr)
 {
+    read(situatieFile, errstr);
+    checkConsistency(errstr);
+}
+
+void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
+{
+    /*
+     * Een verkeerssituatie is consistent als:
+        • Elk voertuig staat op een bestaande baan.
+        • Elk verkeerslicht staat op een bestaande baan.
+        • Elke voertuiggenerator staat op een bestaande baan.
+        • De positie van elk voertuig is kleiner dan de lengte van de baan.
+        • De positie van elk verkeerslicht is kleiner dan de lengte van de baan.
+        • Er is maximaal  ́een voertuiggenerator op elke baan. NOG NIET
+        • Een verkeerslicht mag zich niet in de vertraagafstand van een ander
+        verkeerslicht bevinden (zie Appendix B).
+        Opmerkingen:
+        • Lengte, positie, cyclus, en frequentie moet altijd positief zijn.
+        • De naam wordt gebruikt als unieke identificatie van een baan.
+     */
+
+}
+
+void VerkeerssituatieReader::read(std::string situatieFile, std::ostream &errstr)
+{
     using namespace std;
     TiXmlDocument doc;
     if(!doc.LoadFile(situatieFile.c_str())) {

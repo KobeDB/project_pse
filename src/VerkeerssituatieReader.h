@@ -20,6 +20,11 @@ class VerkeerssituatieReader {
 public:
     VerkeerssituatieReader(std::string situatieFile, std::ostream& errstr);
 
+private:
+    void read(std::string situatieFile, std::ostream &errstr);
+    void checkConsistency(std::ostream& errstr);
+
+public:
     const std::vector<Baan>& getBanen() {return banen;}
     const std::vector<Verkeerslicht>& getVerkeerslichten() {return verkeerslichten;}
     const std::vector<Voertuig>& getVoertuigen() {return voertuigen;}

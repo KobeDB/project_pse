@@ -28,6 +28,7 @@ void Voertuig::update(float deltaTime_s, const std::map<std::string, Baan>& bane
     versnelling = VERSNELLING_MAX * (1 - pow((snelheid / snelheid_max), 4) - pow(delta, 2));
 
     if(licht && licht->getIsRood()) {
+        //TODO: STOPAFSTAND moet eerste helft zijn
         if((licht->getPositie() - positie) < STOPAFSTAND) {
             versnelling = -REMFACTOR_MAX * snelheid / snelheid_max;
         }
