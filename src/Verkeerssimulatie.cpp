@@ -51,8 +51,6 @@ Verkeerssimulatie::Verkeerssimulatie(const std::vector<Baan> &pBanen, const std:
             banen[baan.getNaam()].addVoertuig(voertuig);
         }
     }
-    std::cout << "";
-
 }
 
 void Verkeerssimulatie::update(float deltaTime_s)

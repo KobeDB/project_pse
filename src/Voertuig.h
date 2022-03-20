@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include "DesignByContract.h"
 
 #include "Baan.h"
 
@@ -23,6 +24,10 @@
 
 class Voertuig {
 private:
+    Voertuig* _initCheck;
+public:
+    bool properlyInitialized() const;
+private:
     std::string baanNaam;
     int positie;
     float snelheid;
@@ -30,17 +35,55 @@ private:
     float snelheid_max; // Dit is niet constant omdat dit wordt herberekend bij het vertragen
 
 public:
-    Voertuig(const std::string &baanNaam, int positie)
-        : baanNaam(baanNaam), positie(positie), snelheid(0), versnelling(10), snelheid_max(16.6) {}
+    /*
+     * REQUIRE(positie >= 0, "positie mag niet negatief zijn");
+     * REQUIRE(snelheid >= 0, "snelheid mag niet negatief zijn");
+     * REQUIRE(!baanNaam.empty(), "baanNaam mag niet leeg zijn");
+     */
+    Voertuig(const std::string &baanNaam, int positie);
 
-    const std::string& getBaanNaam() const {return baanNaam;}
-    int getPositie() const {return positie;}
-    float getSnelheid() const {return snelheid;}
-    float getVersnelling() const {return versnelling;}
+    /*
+     * REQUIRE(properlyInitialized(), "class not properly initialized");
+     */
+    const std::string& getBaanNaam() const {
+        REQUIRE(properlyInitialized(), "class not properly initialized");
+        return baanNaam;
+    }
 
+    /*
+     * REQUIRE(properlyInitialized(), "class not properly initialized");
+     */
+    int getPositie() const {
+        REQUIRE(properlyInitialized(), "class not properly initialized");
+        return positie;
+    }
+
+    /*
+     * REQUIRE(properlyInitialized(), "class not properly initialized");
+     */
+    float getSnelheid() const {
+        REQUIRE(properlyInitialized(), "class not properly initialized");
+        return snelheid;
+    }
+
+    /*
+     * REQUIRE(properlyInitialized(), "class not properly initialized");
+     */
+    float getVersnelling() const {
+        REQUIRE(properlyInitialized(), "class not properly initialized");
+        return versnelling;
+    }
+
+    /*
+     *  REQUIRE(properlyInitialized(), "class not properly initialized");
+     *  REQUIRE(deltaTime_s >= 0, "deltaTime_s mag niet negatief zijn");
+     */
     void update(float deltaTime_s, const Verkeerslicht* licht, const Voertuig* voorligger);
 };
 
+/*
+* REQUIRE(tuig.properlyInitialized(), "class not properly initialized");
+*/
 std::ostream& operator<<(std::ostream& os, const Voertuig& tuig);
 
 

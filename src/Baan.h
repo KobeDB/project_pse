@@ -32,6 +32,10 @@ public:
 
     const Verkeerslicht* getVolgendeLicht(int pos) const;
 
+    /*
+     * POST: returnt het voertuig dat net voor pos rijdt. als er geen voorligger is, returnt NULL
+     * ENSURE(returnval == NULL || pos < returnval->getPositie(), "POST: returnval is geen voorligger")
+     */
     const Voertuig* getVoorligger(int pos) const;
 
     void addVerkeerslicht(const Verkeerslicht& licht);

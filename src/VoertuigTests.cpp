@@ -73,8 +73,8 @@ TEST_F(VoertuigTest, HappyDay1VoertuigMetLicht) {
     for(int i = 0; i < 11; i++) {
         licht.update(1);
         voertuig.update(1, &licht, NULL);
-        std::cout << licht.getIsRood();
-        std::cout << voertuig << "\n";
+//        std::cout << licht.getIsRood();
+//        std::cout << voertuig << "\n";
     }
     EXPECT_NEAR(voertuig.getSnelheid(), 0, 2);
 }

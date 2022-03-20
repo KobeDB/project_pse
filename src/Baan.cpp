@@ -52,17 +52,19 @@ void Baan::addVoertuig(const Voertuig &voertuig)
     voertuigen.push_back(voertuig);
 }
 
-
-/// POST: returnt het voertuig dat net voor pos rijdt. als er geen voorligger is, returnt NULL
-/// \param pos
-/// \return
 const Voertuig* Baan::getVoorligger(int pos) const {
+
+    const Voertuig* returnval = NULL;
+
     for(unsigned i = 0; i < voertuigen.size(); i++) {
         const Voertuig& voertuig = voertuigen[i];
-        if(pos < voertuig.getPositie()) // We nemen meteen dit voertuig omdat onze verkeerslichten volgens afstand gesorteerd zijn
-            return &voertuig;
+        if(pos < voertuig.getPositie()) { // We nemen meteen dit voertuig omdat onze verkeerslichten volgens afstand gesorteerd zijn
+            returnval = &voertuig;
+            break;
+        }
     }
-    return NULL;
+    ENSURE(returnval == NULL || pos < returnval->getPositie(), "POST: returnval is geen voorligger");
+    return returnval;
 }
 
 void Baan::update(float deltaTime_s)

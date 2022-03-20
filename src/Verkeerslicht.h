@@ -16,8 +16,7 @@ private:
     bool isRood;
 
 public:
-    Verkeerslicht(const std::string& baan, int positie, int cyclus)
-        : baanNaam(baan), positie(positie), cyclus(cyclus), timer_s(0), isRood(false) {}
+    Verkeerslicht(const std::string& baan, int positie, int cyclus);
 
     const std::string& getBaanNaam() const {return baanNaam;}
     int getPositie() const {return positie;}
