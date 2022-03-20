@@ -62,19 +62,19 @@ TEST_F(VoertuigTest, HappyDay1VoertuigZonderLichten) {
 
 // Tests the "happy day" scenario
 TEST_F(VoertuigTest, HappyDay1VoertuigMetLicht) {
-    Verkeerslicht licht("Baan1", 200, 10);
+    Verkeerslicht licht("Baan1", 140, 7);
 
     Voertuig voertuig("Baan1", 10);
-//    EXPECT_TRUE(voertuig.getBaanNaam() == baan.getNaam());
-//    voertuig.update(1, baan);
-//    EXPECT_NEAR(voertuig.getPositie(), 20, 1);
-//    EXPECT_NEAR(voertuig.getSnelheid(), 10, 1);
-//    EXPECT_NEAR(voertuig.getVersnelling(), 1.25, 1);
+    voertuig.update(1, NULL, NULL);
+    EXPECT_NEAR(voertuig.getPositie(), 20, 1);
+    EXPECT_NEAR(voertuig.getSnelheid(), 10, 1);
+    EXPECT_NEAR(voertuig.getVersnelling(), 1.25, 1);
 
-    for(int i = 0; i < 200; i++) {
-        //std::cout << voertuig;
-        if(voertuig.getSnelheid() < 2) {
-            std::cout << "Stopped at:" << i <<"\n";
-        }
+    for(int i = 0; i < 11; i++) {
+        licht.update(1);
+        voertuig.update(1, &licht, NULL);
+        std::cout << licht.getIsRood();
+        std::cout << voertuig << "\n";
     }
+    EXPECT_NEAR(voertuig.getSnelheid(), 0, 2);
 }
