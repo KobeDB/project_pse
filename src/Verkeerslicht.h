@@ -11,7 +11,7 @@ class Verkeerslicht {
 private:
     std::string baanNaam;
     int positie;
-    const int cyclus;
+    int cyclus; // const
     float timer_s;
     bool isRood;
 

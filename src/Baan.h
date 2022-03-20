@@ -17,7 +17,7 @@ class Baan {
 private:
     std::string naam;
     int lengte;
-    std::vector<Verkeerslicht*> verkeerslichten;
+    std::vector<Verkeerslicht> verkeerslichten;
     std::vector<Voertuig> voertuigen;
 public:
     Baan() : naam(), lengte() {}
@@ -34,7 +34,7 @@ public:
 
     const Voertuig* getVoorligger(int pos) const;
 
-    void addVerkeerslicht(Verkeerslicht& licht);
+    void addVerkeerslicht(const Verkeerslicht& licht);
     void addVoertuig(const Voertuig& voertuig);
 
     /// functie om een Baan mooi af te printen

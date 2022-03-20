@@ -8,10 +8,6 @@
 #include <algorithm>
 #include <sstream>
 
-void Verkeerssimulatie::addVerkeerslicht(const Verkeerslicht& licht)
-{
-    verkeerslichten.push_back(licht);
-}
 
 void Verkeerssimulatie::addBaan(const Baan &baan)
 {
@@ -37,13 +33,13 @@ std::ostream &operator<<(std::ostream &os, const Verkeerssimulatie &sim)
 
 Verkeerssimulatie::Verkeerssimulatie(const std::vector<Baan> &pBanen, const std::vector<Verkeerslicht> &pLichten,
                                      const std::vector<Voertuig> &pVoertuigen)
-                                     : banen(), verkeerslichten(pLichten)
+                                     : banen()
                                      {
     for(unsigned b = 0; b < pBanen.size(); b++) {
         const Baan& baan = pBanen[b];
         banen[baan.getNaam()] = baan;
-        for(unsigned l = 0; l < verkeerslichten.size(); l++) {
-            Verkeerslicht& licht = verkeerslichten[l];
+        for(unsigned l = 0; l < pLichten.size(); l++) {
+            const Verkeerslicht& licht = pLichten[l];
             if(licht.getBaanNaam() != baan.getNaam())
                 continue;
             banen[baan.getNaam()].addVerkeerslicht(licht);

@@ -14,26 +14,26 @@ std::ostream& operator<<(std::ostream& os, const Baan& baan)
     return os;
 }
 
-void Baan::addVerkeerslicht(Verkeerslicht &licht)
+void Baan::addVerkeerslicht(const Verkeerslicht &licht)
 {
     // De verkeerslichten zijn gesorteerd op positie, van klein naar groot
     for(unsigned i = 0; i < verkeerslichten.size(); i++) {
-        if(verkeerslichten[i]->getPositie() > licht.getPositie()) {
-            std::vector<Verkeerslicht*>::iterator it = verkeerslichten.begin() + i;
-            verkeerslichten.insert(it, &licht);
+        if(verkeerslichten[i].getPositie() > licht.getPositie()) {
+            std::vector<Verkeerslicht>::iterator it = verkeerslichten.begin() + i;
+            verkeerslichten.insert(it, licht);
             return;
         }
     }
-    verkeerslichten.push_back(&licht);
+    verkeerslichten.push_back(licht);
 }
 
 
 
 const Verkeerslicht *Baan::getVolgendeLicht(int pos) const {
     for(unsigned i = 0; i < verkeerslichten.size(); i++) {
-        Verkeerslicht* licht = verkeerslichten[i];
-        if(pos < licht->getPositie()) // We nemen meteen dit licht omdat onze verkeerslichten volgens afstand gesorteerd zijn
-            return licht;
+        const Verkeerslicht& licht = verkeerslichten[i];
+        if(pos < licht.getPositie()) // We nemen meteen dit licht omdat onze verkeerslichten volgens afstand gesorteerd zijn
+            return &licht;
     }
     return NULL;
 }
@@ -64,8 +64,8 @@ const Voertuig* Baan::getVoorligger(int pos) const {
 void Baan::update(float deltaTime_s)
 {
     for(unsigned i = 0; i < verkeerslichten.size(); i++) {
-        Verkeerslicht* licht = verkeerslichten[i];
-        licht->update(deltaTime_s);
+        Verkeerslicht& licht = verkeerslichten[i];
+        licht.update(deltaTime_s);
     }
 
     // We lopen de lijst van achter naar voren af, omdat we de lijst ondertussen bewerken
