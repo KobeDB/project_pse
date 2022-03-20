@@ -6,6 +6,7 @@
 
 #include "tinyxml.h"
 #include <sstream>
+#include <algorithm>
 
 int tryParseInt(const std::string& s, bool& success)
 {
@@ -28,20 +29,82 @@ VerkeerssituatieReader::VerkeerssituatieReader(std::string situatieFile, std::os
 
 void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
 {
+    using namespace std;
     /*
      * Een verkeerssituatie is consistent als:
-        • Elk voertuig staat op een bestaande baan.
-        • Elk verkeerslicht staat op een bestaande baan.
-        • Elke voertuiggenerator staat op een bestaande baan.
-        • De positie van elk voertuig is kleiner dan de lengte van de baan.
-        • De positie van elk verkeerslicht is kleiner dan de lengte van de baan.
+        • Elk voertuig staat op een bestaande baan. (done)
+        • Elk verkeerslicht staat op een bestaande baan. (done)
+        • Elke voertuiggenerator staat op een bestaande baan. NOG NIET
+        • De positie van elk voertuig is kleiner dan de lengte van de baan. (done)
+        • De positie van elk verkeerslicht is kleiner dan de lengte van de baan. (done)
         • Er is maximaal  ́een voertuiggenerator op elke baan. NOG NIET
         • Een verkeerslicht mag zich niet in de vertraagafstand van een ander
-        verkeerslicht bevinden (zie Appendix B).
+        verkeerslicht bevinden (zie Appendix B). (done)
         Opmerkingen:
-        • Lengte, positie, cyclus, en frequentie moet altijd positief zijn.
+        • Lengte, positie, cyclus, en frequentie moet altijd positief zijn. (positie done)
         • De naam wordt gebruikt als unieke identificatie van een baan.
      */
+
+
+    vector<string> baanNaam;
+    map<string, Baan> baanAcc;
+    for(int j = 0; j < (int) banen.size(); j++){
+        baanNaam.push_back(banen[j].getNaam());
+        pair<string, Baan> baanInsert (banen[j].getNaam(), banen[j]);
+        baanAcc.insert(baanInsert);
+    }
+    //Elk voertuig staat op een bestaande baan.
+    //De positie van elk voertuig is kleiner dan de lengte van de baan.
+    for(int i = 0; i < (int) voertuigen.size(); i++){
+        Voertuig currVoertuig = voertuigen[i];
+        string baan = currVoertuig.getBaanNaam();
+        int baanpos = currVoertuig.getPositie();
+        if((count(baanNaam.begin(), baanNaam.end(), baan)) != 0){
+            int baanlengte = baanAcc[baan].getLengte();
+            if(baanpos > baanlengte){
+                errstr << "car " << i << " outside of length of " << baan << "\n";
+            }
+        }
+        else{
+            errstr << baan <<" does not exitst\n";
+        }
+        if(baanpos < 0){
+            errstr << "car " << i << " is not on the road";
+        }
+
+
+    }
+
+    //Elk verkeerslicht staat op een bestaande baan.
+    //De positie van elk verkeerslicht is kleiner dan de lengte van de baan.
+    for(int i = 0; i < (int) verkeerslichten.size(); i++){
+        Verkeerslicht currVerkeer = verkeerslichten[i];
+        int x = i;
+        if(i != 0){
+            x = i-1;
+        }
+        Verkeerslicht prevVerkeer = verkeerslichten[x];
+        string baan = currVerkeer.getBaanNaam();
+        int baanpos = currVerkeer.getPositie();
+        if((count(baanNaam.begin(), baanNaam.end(), baan)) != 0){
+            int baanlengte = baanAcc[baan].getLengte();
+            if(baanpos > baanlengte){
+                errstr << "verkeerslicht " << i << " outside of length of " << baan << "\n";
+            }
+        }
+        else{
+            errstr << baan <<" does not exitst\n";
+        }
+        if(baanpos < 0){
+            errstr << "verkeerslicht " << i << " is not on the road";
+        }
+        if(i != 0){
+            if (currVerkeer.getPositie() - 50 <= prevVerkeer.getPositie()){
+                errstr << "Verkeerslicht " << i << " too close to Verkeerslicht " << i-1 << "\n";
+            }
+        }
+    }
+
 
 }
 

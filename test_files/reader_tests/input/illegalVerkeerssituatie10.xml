@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<VERKEERSSITUATIE>
+    <BAAN>
+        <naam>Middelheimlaan</naam>
+        <lengte>600</lengte>
+    </BAAN>
+    <VERKEERSLICHT>
+        <baan>Middelheimlaan</baan>
+        <positie>401</positie>
+        <cyclus>10</cyclus>
+    </VERKEERSLICHT>
+    <VERKEERSLICHT>
+        <baan>Middelheimlaan</baan>
+        <positie>450</positie>
+        <cyclus>10</cyclus>
+    </VERKEERSLICHT>
+</VERKEERSSITUATIE>
