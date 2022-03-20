@@ -7,8 +7,8 @@
 
 std::ostream& operator<<(std::ostream& os, const Baan& baan)
 {
-    for(unsigned i = 0; i < baan.voertuigen.size(); i++) {
-        os << "\tVoertuig " << (i+1) << "\n";
+    for(int i = baan.voertuigen.size()-1; i >= 0 ; i--) {
+        os << "\tVoertuig " << (baan.voertuigen.size()-1-i) << "\n";
         os << baan.voertuigen[i] << "\n";
     }
     return os;
@@ -52,6 +52,10 @@ void Baan::addVoertuig(const Voertuig &voertuig)
     voertuigen.push_back(voertuig);
 }
 
+
+/// POST: returnt het voertuig dat net voor pos rijdt. als er geen voorligger is, returnt NULL
+/// \param pos
+/// \return
 const Voertuig* Baan::getVoorligger(int pos) const {
     for(unsigned i = 0; i < voertuigen.size(); i++) {
         const Voertuig& voertuig = voertuigen[i];
@@ -71,7 +75,7 @@ void Baan::update(float deltaTime_s)
     // We lopen de lijst van achter naar voren af, omdat we de lijst ondertussen bewerken
     for(int i = voertuigen.size()-1; i >= 0; i--) {
         Voertuig& tuig = voertuigen[i];
-        tuig.update(deltaTime_s, *this);
+        tuig.update(deltaTime_s, getVolgendeLicht(tuig.getPositie()), getVoorligger(tuig.getPositie()));
         if(tuig.getPositie() > getLengte()) {
             voertuigen.erase(voertuigen.begin() + i);
         }

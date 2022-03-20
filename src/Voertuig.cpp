@@ -9,14 +9,8 @@
 
 using namespace std;
 
-void Voertuig::update(float deltaTime_s, const Baan& baan)
+void Voertuig::update(float deltaTime_s, const Verkeerslicht* licht, const Voertuig* voorligger)
 {
-    const Verkeerslicht* licht = baan.getVolgendeLicht(positie);
-
-    const Voertuig* tuig = baan.getVoorligger(positie);
-    if(tuig)
-        std::cout << tuig->snelheid << "\n";
-
     float nieuweSnelheid = snelheid + deltaTime_s * versnelling;
     if(nieuweSnelheid < 0 ) {
         positie = (int)((float)positie - pow(snelheid, 2) / (2 * versnelling));
@@ -28,6 +22,11 @@ void Voertuig::update(float deltaTime_s, const Baan& baan)
     }
 
     float delta = 0;
+    if(voorligger) {
+        int dPositie = voorligger->getPositie() - positie - VOERTUIG_LENGTE;
+        float dSnelheid = snelheid - voorligger->getSnelheid();
+        delta = (MINIMALE_VOLGAFSTAND + std::max((float)0, snelheid + (snelheid * dSnelheid)/(2 * sqrt(VERSNELLING_MAX * REMFACTOR_MAX)))) / (float)dPositie;
+    }
     versnelling = VERSNELLING_MAX * (1 - pow((snelheid / snelheid_max), 4) - pow(delta, 2));
 
     if(licht && licht->getIsRood()) {

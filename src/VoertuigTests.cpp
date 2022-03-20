@@ -52,12 +52,29 @@ TEST_F(VoertuigTest, DefaultConstructor) {
 }
 
 // Tests the "happy day" scenario
-TEST_F(VoertuigTest, HappyDayZonderLichten) {
-    Baan baan("Baan1", 400);
-    Voertuig voertuig(baan.getNaam(), 10);
-    EXPECT_TRUE(voertuig.getBaanNaam() == baan.getNaam());
-    voertuig.update(1, baan);
+TEST_F(VoertuigTest, HappyDay1VoertuigZonderLichten) {
+    Voertuig voertuig("Baan1", 10);
+    voertuig.update(1, NULL, NULL);
     EXPECT_NEAR(voertuig.getPositie(), 20, 1);
     EXPECT_NEAR(voertuig.getSnelheid(), 10, 1);
     EXPECT_NEAR(voertuig.getVersnelling(), 1.25, 1);
+}
+
+// Tests the "happy day" scenario
+TEST_F(VoertuigTest, HappyDay1VoertuigMetLicht) {
+    Verkeerslicht licht("Baan1", 200, 10);
+
+    Voertuig voertuig("Baan1", 10);
+//    EXPECT_TRUE(voertuig.getBaanNaam() == baan.getNaam());
+//    voertuig.update(1, baan);
+//    EXPECT_NEAR(voertuig.getPositie(), 20, 1);
+//    EXPECT_NEAR(voertuig.getSnelheid(), 10, 1);
+//    EXPECT_NEAR(voertuig.getVersnelling(), 1.25, 1);
+
+    for(int i = 0; i < 200; i++) {
+        //std::cout << voertuig;
+        if(voertuig.getSnelheid() < 2) {
+            std::cout << "Stopped at:" << i <<"\n";
+        }
+    }
 }

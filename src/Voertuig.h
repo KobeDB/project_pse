@@ -18,6 +18,8 @@
 #define VERSNELLING_MAX 1.44f
 #define VERTRAAGAFSTAND 50
 #define STOPAFSTAND 15
+#define MINIMALE_VOLGAFSTAND 4
+#define VOERTUIG_LENGTE 4
 
 class Voertuig {
 private:
@@ -33,10 +35,10 @@ public:
 
     const std::string& getBaanNaam() const {return baanNaam;}
     int getPositie() const {return positie;}
-    int getSnelheid() const {return snelheid;}
-    int getVersnelling() const {return versnelling;}
+    float getSnelheid() const {return snelheid;}
+    float getVersnelling() const {return versnelling;}
 
-    void update(float deltaTime_s, const Baan& baan);
+    void update(float deltaTime_s, const Verkeerslicht* licht, const Voertuig* voorligger);
 };
 
 std::ostream& operator<<(std::ostream& os, const Voertuig& tuig);

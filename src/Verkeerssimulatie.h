@@ -27,8 +27,5 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Verkeerssimulatie& sim);
 };
 
-void readVerkeerssituatieFromXml(const std::string& xmlFile, std::vector<Baan>& banen, std::vector<Verkeerslicht>& verkeerslichten, std::vector<Voertuig>& voertuigen);
-
-
 
 #endif //PROJECT_PSE_VERKEERSSIMULATIE_H
