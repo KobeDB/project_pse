@@ -36,7 +36,7 @@ public:
     int getSnelheid() const {return snelheid;}
     int getVersnelling() const {return versnelling;}
 
-    void update(float deltaTime_s, const std::map<std::string, Baan>& banen);
+    void update(float deltaTime_s, const Baan& baan);
 };
 
 std::ostream& operator<<(std::ostream& os, const Voertuig& tuig);

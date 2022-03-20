@@ -9,10 +9,13 @@
 
 using namespace std;
 
-void Voertuig::update(float deltaTime_s, const std::map<std::string, Baan>& banen)
+void Voertuig::update(float deltaTime_s, const Baan& baan)
 {
-    const Baan& baan = banen.at(baanNaam);
     const Verkeerslicht* licht = baan.getVolgendeLicht(positie);
+
+    const Voertuig* tuig = baan.getVoorligger(positie);
+    if(tuig)
+        std::cout << tuig->snelheid << "\n";
 
     float nieuweSnelheid = snelheid + deltaTime_s * versnelling;
     if(nieuweSnelheid < 0 ) {

@@ -53,16 +53,11 @@ TEST_F(VoertuigTest, DefaultConstructor) {
 
 // Tests the "happy day" scenario
 TEST_F(VoertuigTest, HappyDayZonderLichten) {
-    std::map<std::string, Baan> banen;
-    banen["Baan1"] = Baan("Baan1", 400);
-    Voertuig voertuig(banen["Baan1"].getNaam(), 10);
-    EXPECT_TRUE(voertuig.getBaanNaam() == banen["Baan1"].getNaam());
-
-    voertuig.update(1, banen);
+    Baan baan("Baan1", 400);
+    Voertuig voertuig(baan.getNaam(), 10);
+    EXPECT_TRUE(voertuig.getBaanNaam() == baan.getNaam());
+    voertuig.update(1, baan);
     EXPECT_NEAR(voertuig.getPositie(), 20, 1);
     EXPECT_NEAR(voertuig.getSnelheid(), 10, 1);
     EXPECT_NEAR(voertuig.getVersnelling(), 1.25, 1);
-    //
-
-
 }

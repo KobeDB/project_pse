@@ -18,8 +18,6 @@ private:
 
     std::map<std::string, Baan> banen; // Hiermee kunnen we aan de Baan objecten met hun namen als key
     std::vector<Verkeerslicht> verkeerslichten;
-
-    std::vector<Voertuig> voertuigen;
 public:
     Verkeerssimulatie(const std::vector<Baan>& banen, const std::vector<Verkeerslicht>& lichten, const std::vector<Voertuig>& voertuigen);
     void addVerkeerslicht(const Verkeerslicht& licht);

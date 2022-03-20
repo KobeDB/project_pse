@@ -11,25 +11,38 @@
 
 #include "Verkeerslicht.h"
 
+class Voertuig;
+
 class Baan {
 private:
     std::string naam;
     int lengte;
-    std::vector<Verkeerslicht*> lichten;
+    std::vector<Verkeerslicht*> verkeerslichten;
+    std::vector<Voertuig> voertuigen;
 public:
     Baan() : naam(), lengte() {}
     Baan(const std::string& naam, int lengte) : naam(naam), lengte(lengte) {}
+
+    void update(float deltaTime_s);
+
+    bool done() const;
 
     const std::string& getNaam() const {return naam;}
     int getLengte() const {return lengte;}
 
     const Verkeerslicht* getVolgendeLicht(int pos) const;
 
+    const Voertuig* getVoorligger(int pos) const;
+
     void addVerkeerslicht(Verkeerslicht& licht);
+    void addVoertuig(const Voertuig& voertuig);
+
+    /// functie om een Baan mooi af te printen
+    friend std::ostream& operator<<(std::ostream& os, const Baan& baan);
 };
 
-/// functie om een Baan mooi af te printen
-std::ostream& operator<<(std::ostream& os, const Baan& baan);
+
+
 
 
 

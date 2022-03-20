@@ -28,17 +28,16 @@ std::ostream &operator<<(std::ostream &os, const Verkeerssimulatie &sim)
 //        os << "\t\t-> snelheid: " << sim.voertuigen[i].getSnelheid() << "\n";
 //    }
 
-    for(unsigned i = 0; i < sim.voertuigen.size(); i++) {
-        os << "\tVoertuig " << (i+1) << "\n";
-        os << sim.voertuigen[i] << "\n";
+    using namespace std;
+    for(map<string,Baan>::const_iterator it = sim.banen.begin(); it != sim.banen.end(); it++) {
+        os << it->second;
     }
-
     return os;
 }
 
 Verkeerssimulatie::Verkeerssimulatie(const std::vector<Baan> &pBanen, const std::vector<Verkeerslicht> &pLichten,
                                      const std::vector<Voertuig> &pVoertuigen)
-                                     : banen(), verkeerslichten(pLichten), voertuigen(pVoertuigen)
+                                     : banen(), verkeerslichten(pLichten)
                                      {
     for(unsigned b = 0; b < pBanen.size(); b++) {
         const Baan& baan = pBanen[b];
@@ -49,6 +48,12 @@ Verkeerssimulatie::Verkeerssimulatie(const std::vector<Baan> &pBanen, const std:
                 continue;
             banen[baan.getNaam()].addVerkeerslicht(licht);
         }
+        for(unsigned vi = 0; vi < pVoertuigen.size(); vi++) {
+            const Voertuig& voertuig = pVoertuigen[vi];
+            if(voertuig.getBaanNaam() != baan.getNaam())
+                continue;
+            banen[baan.getNaam()].addVoertuig(voertuig);
+        }
     }
     std::cout << "";
 
@@ -56,25 +61,20 @@ Verkeerssimulatie::Verkeerssimulatie(const std::vector<Baan> &pBanen, const std:
 
 void Verkeerssimulatie::update(float deltaTime_s)
 {
-    for(unsigned i = 0; i < verkeerslichten.size(); i++) {
-        Verkeerslicht& licht = verkeerslichten[i];
-        licht.update(deltaTime_s);
+    using namespace std;
+    for(map<string,Baan>::iterator it = banen.begin(); it != banen.end(); it++) {
+        it->second.update(deltaTime_s);
     }
-
-    // We lopen de lijst van achter naar voren af, omdat we de lijst ondertussen bewerken
-    for(int i = voertuigen.size()-1; i >= 0; i--) {
-        Voertuig& tuig = voertuigen[i];
-        const Baan& baanVanTuig = banen[tuig.getBaanNaam()];
-        tuig.update(deltaTime_s, banen);
-        if(tuig.getPositie() > baanVanTuig.getLengte()) {
-            voertuigen.erase(voertuigen.begin() + i);
-        }
-    }
-
 }
 
 bool Verkeerssimulatie::done() const {
-    return voertuigen.empty();
+    using namespace std;
+    for(map<string,Baan>::const_iterator it = banen.begin(); it != banen.end(); it++) {
+        if(!it->second.done()){
+            return false;
+        }
+    }
+    return true;
 }
 
 //int tryParseInt(const std::string& s, bool& success)

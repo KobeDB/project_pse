@@ -25,7 +25,7 @@ int main() {
     std::cout << "SIMULATIE: \n";
     std::cout << simulatie << "\n";
     float time = 0;
-    for(int i = 0; i < 55; i++) {
+    for(int i = 0; i < 100; i++) { // We stoppen na 100 updates als simulatie blijft hangen
         float deltaTime_s = 1;
         usleep((int)(deltaTime_s * 1000)); // usleep uses microseconds, adjust scaling factor to let the simulation-'seconds' tick faster
         time += deltaTime_s;
