@@ -55,10 +55,10 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
     }
     //Elk voertuig staat op een bestaande baan.
     //De positie van elk voertuig is kleiner dan de lengte van de baan.
-    for(int i = 0; i < (int) voertuigen.size(); i++){
-        Voertuig currVoertuig = voertuigen[i];
-        string baan = currVoertuig.getBaanNaam();
-        int baanpos = currVoertuig.getPositie();
+    for(unsigned i = 0; i < voertuigen.size(); i++){
+        //const Voertuig* currVoertuig = &voertuigen[i];
+        string baan = voertuigen[i].getBaanNaam();
+        int baanpos = voertuigen[i].getPositie();
         if((count(baanNaam.begin(), baanNaam.end(), baan)) != 0){
             int baanlengte = baanAcc[baan].getLengte();
             if(baanpos > baanlengte){
@@ -78,12 +78,12 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
     //Elk verkeerslicht staat op een bestaande baan.
     //De positie van elk verkeerslicht is kleiner dan de lengte van de baan.
     for(int i = 0; i < (int) verkeerslichten.size(); i++){
-        Verkeerslicht currVerkeer = verkeerslichten[i];
+        const Verkeerslicht& currVerkeer = verkeerslichten[i];
         int x = i;
         if(i != 0){
             x = i-1;
         }
-        Verkeerslicht prevVerkeer = verkeerslichten[x];
+        const Verkeerslicht& prevVerkeer = verkeerslichten[x];
         string baan = currVerkeer.getBaanNaam();
         int baanpos = currVerkeer.getPositie();
         if((count(baanNaam.begin(), baanNaam.end(), baan)) != 0){

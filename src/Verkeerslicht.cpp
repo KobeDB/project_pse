@@ -12,7 +12,7 @@ using namespace std;
 
 Verkeerslicht::Verkeerslicht(const std::string& baan, int positie, int cyclus): baanNaam(baan), positie(positie), cyclus(cyclus), timer_s(0), isRood(false)
 {
-    REQUIRE(positie >= 0, "positie mag niet negatief zijn");
+    //REQUIRE(positie >= 0, "positie mag niet negatief zijn");
     REQUIRE(cyclus > 0, "cyclus mag niet 0 of negatief zijn");
     REQUIRE(timer_s == 0, "timer niet geinitialiseerd op 0");
     REQUIRE(!baan.empty(), "baanNaam mag niet leeg zijn");
