@@ -56,9 +56,9 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
     //Elk voertuig staat op een bestaande baan.
     //De positie van elk voertuig is kleiner dan de lengte van de baan.
     for(unsigned i = 0; i < voertuigen.size(); i++){
-        //const Voertuig* currVoertuig = &voertuigen[i];
-        string baan = voertuigen[i].getBaanNaam();
-        int baanpos = voertuigen[i].getPositie();
+        const Voertuig* currVoertuig = &voertuigen[i];
+        string baan = currVoertuig->getBaanNaam();
+        int baanpos = currVoertuig->getPositie();
         if((count(baanNaam.begin(), baanNaam.end(), baan)) != 0){
             int baanlengte = baanAcc[baan].getLengte();
             if(baanpos > baanlengte){

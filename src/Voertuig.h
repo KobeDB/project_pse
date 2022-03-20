@@ -42,6 +42,12 @@ public:
      */
     Voertuig(const std::string &baanNaam, int positie);
 
+    // Copy constructor nodig om initCheck op het JUISTE adres te zetten van dit NIEUWE object
+    Voertuig(const Voertuig& other)
+        : baanNaam(other.baanNaam), positie(other.positie), snelheid(other.snelheid), versnelling(other.versnelling), snelheid_max(other.snelheid_max) {
+        _initCheck = this;
+}
+
     /*
      * REQUIRE(properlyInitialized(), "class not properly initialized");
      */
