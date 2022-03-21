@@ -31,21 +31,23 @@ std::ostream &operator<<(std::ostream &os, const Verkeerssimulatie &sim)
     return os;
 }
 
-Verkeerssimulatie::Verkeerssimulatie(const std::vector<Baan> &pBanen, const std::vector<Verkeerslicht> &pLichten,
-                                     const std::vector<Voertuig> &pVoertuigen)
+Verkeerssimulatie::Verkeerssimulatie(const std::vector<BaanInfo>& pBanen, const std::vector<VerkeerslichtInfo>& pLichten, const std::vector<VoertuigInfo>& pVoertuigen)
                                      : banen()
                                      {
     for(unsigned b = 0; b < pBanen.size(); b++) {
-        const Baan& baan = pBanen[b];
+        const BaanInfo& baanInfo = pBanen[b];
+        Baan baan(baanInfo.naam, baanInfo.lengte); // Maak nu het werkelijke Baan object uit de BaanInfo
         banen[baan.getNaam()] = baan;
         for(unsigned l = 0; l < pLichten.size(); l++) {
-            const Verkeerslicht& licht = pLichten[l];
+            const VerkeerslichtInfo& lichtInfo = pLichten[l];
+            Verkeerslicht licht(lichtInfo.baanNaam, lichtInfo.positie, lichtInfo.cyclus);
             if(licht.getBaanNaam() != baan.getNaam())
                 continue;
             banen[baan.getNaam()].addVerkeerslicht(licht);
         }
         for(unsigned vi = 0; vi < pVoertuigen.size(); vi++) {
-            const Voertuig& voertuig = pVoertuigen[vi];
+            const VoertuigInfo& voertuigInfo = pVoertuigen[vi];
+            Voertuig voertuig(voertuigInfo.baanNaam, voertuigInfo.positie);
             if(voertuig.getBaanNaam() != baan.getNaam())
                 continue;
             banen[baan.getNaam()].addVoertuig(voertuig);

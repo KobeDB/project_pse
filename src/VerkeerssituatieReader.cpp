@@ -47,20 +47,20 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
 
 
     vector<string> baanNaam;
-    map<string, Baan> baanAcc;
+    map<string, BaanInfo> baanAcc;
     for(int j = 0; j < (int) banen.size(); j++){
-        baanNaam.push_back(banen[j].getNaam());
-        pair<string, Baan> baanInsert (banen[j].getNaam(), banen[j]);
+        baanNaam.push_back(banen[j].naam);
+        pair<string, BaanInfo> baanInsert (banen[j].naam, banen[j]);
         baanAcc.insert(baanInsert);
     }
     //Elk voertuig staat op een bestaande baan.
     //De positie van elk voertuig is kleiner dan de lengte van de baan.
     for(unsigned i = 0; i < voertuigen.size(); i++){
-        const Voertuig* currVoertuig = &voertuigen[i];
-        string baan = currVoertuig->getBaanNaam();
-        int baanpos = currVoertuig->getPositie();
+        const VoertuigInfo& currVoertuig = voertuigen[i];
+        string baan = currVoertuig.baanNaam;
+        int baanpos = currVoertuig.positie;
         if((count(baanNaam.begin(), baanNaam.end(), baan)) != 0){
-            int baanlengte = baanAcc[baan].getLengte();
+            int baanlengte = baanAcc[baan].lengte;
             if(baanpos > baanlengte){
                 errstr << "car " << i << " outside of length of " << baan << "\n";
             }
@@ -76,16 +76,16 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
     //Elk verkeerslicht staat op een bestaande baan.
     //De positie van elk verkeerslicht is kleiner dan de lengte van de baan.
     for(int i = 0; i < (int) verkeerslichten.size(); i++){
-        const Verkeerslicht& currVerkeer = verkeerslichten[i];
+        const VerkeerslichtInfo& currVerkeer = verkeerslichten[i];
         int x = i;
         if(i != 0){
             x = i-1;
         }
-        const Verkeerslicht& prevVerkeer = verkeerslichten[x];
-        string baan = currVerkeer.getBaanNaam();
-        int baanpos = currVerkeer.getPositie();
+        const VerkeerslichtInfo& prevVerkeer = verkeerslichten[x];
+        string baan = currVerkeer.baanNaam;
+        int baanpos = currVerkeer.positie;
         if((count(baanNaam.begin(), baanNaam.end(), baan)) != 0){
-            int baanlengte = baanAcc[baan].getLengte();
+            int baanlengte = baanAcc[baan].lengte;
             if(baanpos > baanlengte){
                 errstr << "verkeerslicht " << i << " outside of length of " << baan << "\n";
             }
@@ -97,7 +97,7 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
             errstr << "verkeerslicht " << i << " is not on the road";
         }
         if(i != 0){
-            if (currVerkeer.getPositie() - 50 <= prevVerkeer.getPositie()){
+            if (currVerkeer.positie - 50 <= prevVerkeer.positie){
                 errstr << "Verkeerslicht " << i << " too close to Verkeerslicht " << i-1 << "\n";
             }
         }
@@ -149,7 +149,7 @@ void VerkeerssituatieReader::read(std::string situatieFile, std::ostream &errstr
                 continue;
             }
 
-            Baan baan(naam, lengte);
+            BaanInfo baan(naam, lengte);
             banen.push_back(baan);
 
             continue;
@@ -189,7 +189,7 @@ void VerkeerssituatieReader::read(std::string situatieFile, std::ostream &errstr
                 continue;
             }
 
-            Verkeerslicht licht(naam, lengte, cyclus);
+            VerkeerslichtInfo licht(naam, lengte, cyclus);
             verkeerslichten.push_back(licht);
 
             continue;
@@ -220,7 +220,7 @@ void VerkeerssituatieReader::read(std::string situatieFile, std::ostream &errstr
                 continue;
             }
 
-            Voertuig voertuig(baanNaam, positie);
+            VoertuigInfo voertuig(baanNaam, positie);
             voertuigen.push_back(voertuig);
 
             continue;

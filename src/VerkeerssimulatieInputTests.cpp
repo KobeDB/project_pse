@@ -51,16 +51,16 @@ TEST_F(VerkeerssimulatieInputTest, HappyDay) {
     VerkeerssituatieReader reader("reader_tests/input/happyDay.xml", oss);
     ASSERT_TRUE(oss.str().size() == 0); // Asserteer dat er geen errors waren
 
-    std::vector<Baan> banen = reader.getBanen();
+    std::vector<BaanInfo> banen = reader.getBanen();
     ASSERT_TRUE(banen.size() == 1);
-    EXPECT_TRUE(banen[0].getNaam() == "Middelheimlaan");
-    EXPECT_TRUE(banen[0].getLengte() == 600);
+    EXPECT_TRUE(banen[0].naam == "Middelheimlaan");
+    EXPECT_TRUE(banen[0].lengte == 600);
 
-    std::vector<Verkeerslicht> lichten = reader.getVerkeerslichten();
+    std::vector<VerkeerslichtInfo> lichten = reader.getVerkeerslichten();
     ASSERT_TRUE(lichten.size() == 1);
-    EXPECT_TRUE(lichten[0].getBaanNaam() == banen[0].getNaam());
-    EXPECT_TRUE(lichten[0].getPositie() == 450);
-    EXPECT_TRUE(lichten[0].getCyclus() == 10);
+    EXPECT_TRUE(lichten[0].baanNaam == banen[0].naam);
+    EXPECT_TRUE(lichten[0].positie == 450);
+    EXPECT_TRUE(lichten[0].cyclus == 10);
 }
 
 TEST_F(VerkeerssimulatieInputTest, InputIllegalVerkeerssituaties) {

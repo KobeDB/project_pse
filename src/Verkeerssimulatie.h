@@ -13,12 +13,14 @@
 #include "Verkeerslicht.h"
 #include "Voertuig.h"
 
+#include "VerkeerssituatieReader.h"
+
 class Verkeerssimulatie {
 private:
 
     std::map<std::string, Baan> banen; // Hiermee kunnen we aan de Baan objecten met hun namen als key
 public:
-    Verkeerssimulatie(const std::vector<Baan>& banen, const std::vector<Verkeerslicht>& lichten, const std::vector<Voertuig>& voertuigen);
+    Verkeerssimulatie(const std::vector<BaanInfo>& banen, const std::vector<VerkeerslichtInfo>& lichten, const std::vector<VoertuigInfo>& voertuigen);
     void addBaan(const Baan& baan);
 
     void update(float deltaTime_s);
