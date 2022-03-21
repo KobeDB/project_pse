@@ -5,6 +5,12 @@
 #include "Baan.h"
 #include "Voertuig.h"
 
+Baan::Baan(const std::string& naam, int lengte) : naam(naam), lengte(lengte)
+{
+    REQUIRE(!naam.empty(), "baannaam mag niet leeg zijn");
+    REQUIRE(lengte > 0, "lengte moet groter zijn dan 0");
+}
+
 std::ostream& operator<<(std::ostream& os, const Baan& baan)
 {
     for(int i = baan.voertuigen.size()-1; i >= 0 ; i--) {
@@ -53,6 +59,7 @@ void Baan::addVoertuig(const Voertuig &voertuig)
 }
 
 const Voertuig* Baan::getVoorligger(int pos) const {
+    REQUIRE(pos >= 0, "pos mag niet negatief zijn");
 
     const Voertuig* returnval = NULL;
 

@@ -21,7 +21,7 @@ private:
     std::vector<Voertuig> voertuigen;
 public:
     Baan() : naam(), lengte() {}
-    Baan(const std::string& naam, int lengte) : naam(naam), lengte(lengte) {}
+    Baan(const std::string& naam, int lengte);
 
     void update(float deltaTime_s);
 

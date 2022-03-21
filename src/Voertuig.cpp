@@ -13,8 +13,6 @@ using namespace std;
 
 Voertuig::Voertuig(const std::string &baanNaam, int positie): baanNaam(baanNaam), positie(positie), snelheid(0), versnelling(10), snelheid_max(16.6)
 {
-    // OLD: Deze REQUIRES zijn onderdrukt omdat anders onze consistentie check niet aan bod komt
-    // Maar ze zijn volledig en werken correct
     REQUIRE(positie >= 0, "positie mag niet negatief zijn");
     REQUIRE(snelheid >= 0, "snelheid mag niet negatief zijn");
     REQUIRE(!baanNaam.empty(), "baanNaam mag niet leeg zijn");

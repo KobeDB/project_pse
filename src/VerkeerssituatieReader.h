@@ -18,27 +18,30 @@
 /// Deze datastructuren bewaren geen invarianten, omdat deze worden gebruikt voor het
 /// nakijken van de verkeers-consistentie. Deze structs worden absoluut niet intern gebruikt in de simulatie!
 
+// Immutable struct, dus geen immutability check nodig
 struct BaanInfo {
-    std::string naam;
-    int lengte;
+    const std::string naam;
+    const int lengte;
 
     // Default constructor nodig om BaanInfo te kunnen gebruiken in een map
     BaanInfo() : naam(), lengte() {}
     BaanInfo(const std::string& naam, int lengte) : naam(naam), lengte(lengte) {}
 };
 
+// Immutable struct
 struct VoertuigInfo {
-    std::string baanNaam;
-    int positie;
+    const std::string baanNaam;
+    const int positie;
 
     // Het definieren van een constructor DWINGT de user om alle velden te initialiseren !
     VoertuigInfo(const std::string& baanNaam, int positie) : baanNaam(baanNaam), positie(positie) {}
 };
 
+// Immutable struct
 struct VerkeerslichtInfo {
-    std::string baanNaam;
-    int positie;
-    int cyclus;
+    const std::string baanNaam;
+    const int positie;
+    const int cyclus;
 
     VerkeerslichtInfo(const std::string& baanNaam, int positie, int cyclus) : baanNaam(baanNaam), positie(positie), cyclus(cyclus) {}
 };
