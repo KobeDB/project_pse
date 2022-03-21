@@ -65,7 +65,7 @@ TEST_F(VoertuigTest, HappyDay1VoertuigMetLicht) {
     Verkeerslicht licht("Baan1", 140, 7);
 
     Voertuig voertuig("Baan1", 10);
-    voertuig.update(1, NULL, NULL);
+    voertuig.update(1, &licht, NULL);
     EXPECT_NEAR(voertuig.getPositie(), 20, 1);
     EXPECT_NEAR(voertuig.getSnelheid(), 10, 1);
     EXPECT_NEAR(voertuig.getVersnelling(), 1.25, 1);
@@ -77,4 +77,41 @@ TEST_F(VoertuigTest, HappyDay1VoertuigMetLicht) {
 //        std::cout << voertuig << "\n";
     }
     EXPECT_NEAR(voertuig.getSnelheid(), 0, 2);
+}
+
+TEST_F(VoertuigTest, HappyDayVoertuigenMetLicht) {
+    Verkeerslicht licht("Baan1", 140, 6);
+
+    Voertuig voertuig1("Baan1", 30);
+    Voertuig voertuig2("Baan1", 0);
+    voertuig1.update(1, &licht, NULL);
+    voertuig2.update(1, &licht, &voertuig1);
+    EXPECT_NEAR(voertuig1.getPositie(), 40, 1);
+    EXPECT_NEAR(voertuig1.getSnelheid(), 10, 1);
+    EXPECT_NEAR(voertuig1.getVersnelling(), 1, 1);
+    EXPECT_NEAR(voertuig2.getPositie(), 10, 1);
+    EXPECT_NEAR(voertuig2.getSnelheid(), 10, 1);
+    EXPECT_NEAR(voertuig2.getVersnelling(), 1, 1);
+
+    for(int i = 0; i < 10; i++) {
+        licht.update(1);
+        voertuig1.update(1, &licht, NULL);
+        voertuig2.update(1, &licht, &voertuig1);
+//        std::cout << "Tijdstip: " << i << "\n";
+//        std::cout << "" << licht.getIsRood();
+//        std::cout << "\t" << voertuig1 << "\n";
+    }
+    //Licht rood
+    EXPECT_NEAR(voertuig2.getSnelheid(), 0, 2);
+    EXPECT_NEAR(voertuig1.getSnelheid(), 0, 2);
+
+    for(int i = 0; i < 3; i++) {
+        licht.update(1);
+        voertuig1.update(1, &licht, NULL);
+        voertuig2.update(1, &licht, &voertuig1);
+    }
+    //Licht terug groen
+    EXPECT_GT(voertuig1.getSnelheid(), 3);
+    EXPECT_GT(voertuig2.getSnelheid(), 3);
+
 }

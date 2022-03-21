@@ -9,11 +9,6 @@
 #include <sstream>
 
 
-void Verkeerssimulatie::addBaan(const Baan &baan)
-{
-    banen[baan.getNaam()] = baan;
-}
-
 std::ostream &operator<<(std::ostream &os, const Verkeerssimulatie &sim)
 {
 

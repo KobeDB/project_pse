@@ -21,7 +21,6 @@ private:
     std::map<std::string, Baan> banen; // Hiermee kunnen we aan de Baan objecten met hun namen als key
 public:
     Verkeerssimulatie(const std::vector<BaanInfo>& banen, const std::vector<VerkeerslichtInfo>& lichten, const std::vector<VoertuigInfo>& voertuigen);
-    void addBaan(const Baan& baan);
 
     void update(float deltaTime_s);
     bool done() const;
