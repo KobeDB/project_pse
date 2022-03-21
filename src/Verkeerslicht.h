@@ -21,7 +21,7 @@ public:
     const std::string& getBaanNaam() const {return baanNaam;}
     int getPositie() const {return positie;}
     bool getIsRood() const {return isRood;}
-    int getCyclus() {return cyclus;}
+    int getCyclus() const {return cyclus;}
 
     void update(float deltaTime_s);
 

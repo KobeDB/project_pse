@@ -71,8 +71,6 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
         if(baanpos < 0){
             errstr << "car " << i << " is not on the road";
         }
-
-
     }
 
     //Elk verkeerslicht staat op een bestaande baan.
