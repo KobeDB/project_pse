@@ -49,13 +49,13 @@ TEST_F(BaanTest, DefaultConstructor) {
 // Tests the "happy day" scenario
 TEST_F(BaanTest, EXTREMEFULLTEST) {
     Verkeerslicht licht("Baan1", 50, 5);
-    EXPECT_FALSE(licht.getIsRood());
+    EXPECT_FALSE(licht.isRood());
     licht.update(4);
-    EXPECT_FALSE(licht.getIsRood());
+    EXPECT_FALSE(licht.isRood());
     licht.update(1);
-    EXPECT_TRUE(licht.getIsRood());
+    EXPECT_TRUE(licht.isRood());
     licht.update(3);
-    EXPECT_TRUE(licht.getIsRood());
+    EXPECT_TRUE(licht.isRood());
     licht.update(2);
-    EXPECT_FALSE(licht.getIsRood());
+    EXPECT_FALSE(licht.isRood());
 }

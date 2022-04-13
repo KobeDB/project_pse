@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Verkeerslicht::Verkeerslicht(const std::string& baan, int positie, int cyclus): baanNaam(baan), positie(positie), cyclus(cyclus), timer_s(0), isRood(false)
+Verkeerslicht::Verkeerslicht(const std::string& baan, int positie, int cyclus): baanNaam(baan), positie(positie), cyclus(cyclus), timer_s(0), b_isRood(false)
 {
     REQUIRE(positie >= 0, "positie mag niet negatief zijn");
     REQUIRE(cyclus > 0, "cyclus mag niet 0 of negatief zijn");
@@ -25,8 +25,8 @@ void Verkeerslicht::update(float deltaTime_s)
     timer_s += deltaTime_s;
     if(timer_s >= (float)cyclus) {
         timer_s = (int) (timer_s + deltaTime_s + 0.5f) % cyclus;
-        isRood = !isRood;
+        b_isRood = !b_isRood;
     }
-//    string kleur = isRood? "rood" : "groen";
+//    string kleur = b_isRood? "rood" : "groen";
 //    cout << "Licht: " << kleur << "\n"; // Tijdelijke debug print
 }

@@ -13,14 +13,14 @@ private:
     int positie;
     int cyclus; // const
     float timer_s;
-    bool isRood;
+    bool b_isRood;
 
 public:
     Verkeerslicht(const std::string& baan, int positie, int cyclus);
 
     const std::string& getBaanNaam() const {return baanNaam;}
     int getPositie() const {return positie;}
-    bool getIsRood() const {return isRood;}
+    bool isRood() const {return b_isRood;}
     int getCyclus() const {return cyclus;}
 
     void update(float deltaTime_s);

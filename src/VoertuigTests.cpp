@@ -73,7 +73,7 @@ TEST_F(VoertuigTest, HappyDay1VoertuigMetLicht) {
     for(int i = 0; i < 11; i++) {
         licht.update(1);
         voertuig.update(1, &licht, NULL);
-//        std::cout << licht.getIsRood();
+//        std::cout << licht.isRood();
 //        std::cout << voertuig << "\n";
     }
     EXPECT_NEAR(voertuig.getSnelheid(), 0, 2);
@@ -98,7 +98,7 @@ TEST_F(VoertuigTest, HappyDayVoertuigenMetLicht) {
         voertuig1.update(1, &licht, NULL);
         voertuig2.update(1, &licht, &voertuig1);
 //        std::cout << "Tijdstip: " << i << "\n";
-//        std::cout << "" << licht.getIsRood();
+//        std::cout << "" << licht.isRood();
 //        std::cout << "\t" << voertuig1 << "\n";
     }
     //Licht rood

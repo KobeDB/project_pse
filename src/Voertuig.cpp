@@ -11,7 +11,7 @@
 
 using namespace std;
 
-Voertuig::Voertuig(const std::string &baanNaam, int positie): baanNaam(baanNaam), positie(positie), snelheid(0), versnelling(10), snelheid_max(16.6)
+Voertuig::Voertuig(const std::string &baanNaam, int positie): baanNaam(baanNaam), positie(positie), snelheid(0), versnelling(10), snelheid_max(get_V_MAX())
 {
     REQUIRE(positie >= 0, "positie mag niet negatief zijn");
     REQUIRE(snelheid >= 0, "snelheid mag niet negatief zijn");
@@ -26,6 +26,32 @@ void Voertuig::update(float deltaTime_s, const Verkeerslicht* licht, const Voert
     REQUIRE(properlyInitialized(), "class not properly initialized");
     REQUIRE(deltaTime_s >= 0, "deltaTime_s mag niet negatief zijn");
 
+    // Als voorligger zich bevindt achter stopafstand voor het rode verkeerslicht, is hij geen voorligger meer
+    if(licht && voorligger && licht->isRood() && (licht->getPositie() - get_STOPAFSTAND() / 2) < voorligger->getPositie()) {
+        voorligger = NULL;
+    }
+
+    updatePositieEnSnelheid(deltaTime_s);
+
+    updateVersnelling(voorligger);
+
+    if(licht && licht->isRood()) {
+        if(!voorligger) {
+            if((licht->getPositie() - positie) < get_STOPAFSTAND()) {
+                stop();
+            }
+            else if((licht->getPositie() - positie) < get_VERTRAAGAFSTAND()) {
+                vertraag();
+            }
+            else {
+                versnel();
+            }
+        }
+    }
+}
+
+void Voertuig::updatePositieEnSnelheid(float deltaTime_s)
+{
     float nieuweSnelheid = snelheid + deltaTime_s * versnelling;
     if(nieuweSnelheid < 0 ) {
         positie = (int)((float)positie - pow(snelheid, 2) / (2 * versnelling));
@@ -35,26 +61,32 @@ void Voertuig::update(float deltaTime_s, const Verkeerslicht* licht, const Voert
         snelheid = nieuweSnelheid;
         positie += (int)(snelheid * deltaTime_s);
     }
+}
 
+void Voertuig::updateVersnelling(const Voertuig* voorligger)
+{
     float delta = 0;
     if(voorligger) {
-        int dPositie = voorligger->getPositie() - positie - VOERTUIG_LENGTE;
+        int dPositie = voorligger->getPositie() - positie - get_VOERTUIG_LENGTE();
         float dSnelheid = snelheid - voorligger->getSnelheid();
-        delta = (MINIMALE_VOLGAFSTAND + std::max((float)0, snelheid + (snelheid * dSnelheid)/(2 * sqrt(VERSNELLING_MAX * REMFACTOR_MAX)))) / (float)dPositie;
+        delta = ((float)get_MINIMALE_VOLGAFSTAND() + std::max((float)0, snelheid + (snelheid * dSnelheid)/(2 * sqrt(get_VERSNELLING_MAX() * get_REMFACTOR_MAX())))) / (float)dPositie;
     }
-    versnelling = VERSNELLING_MAX * (1 - pow((snelheid / snelheid_max), 4) - pow(delta, 2));
+    versnelling = get_VERSNELLING_MAX() * (1 - pow((snelheid / snelheid_max), 4) - pow(delta, 2));
+}
 
-    if(licht && licht->getIsRood()) {
-        if((licht->getPositie() - positie) < STOPAFSTAND) {
-            versnelling = -REMFACTOR_MAX * snelheid / snelheid_max;
-        }
-        else if((licht->getPositie() - positie) < VERTRAAGAFSTAND) {
-            snelheid_max = VERTRAAGFACTOR * V_MAX;
-        }
-    }
-    else {
-        snelheid_max = V_MAX;
-    }
+void Voertuig::vertraag()
+{
+    versnelling = -get_REMFACTOR_MAX() * snelheid / snelheid_max;
+}
+
+void Voertuig::stop()
+{
+    snelheid_max = get_VERTRAAGFACTOR() * get_V_MAX();
+}
+
+void Voertuig::versnel()
+{
+    snelheid_max = get_V_MAX();
 }
 
 bool Voertuig::properlyInitialized() const {

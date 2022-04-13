@@ -18,10 +18,12 @@ private:
     std::string naam;
     int lengte;
     std::vector<Verkeerslicht> verkeerslichten;
-    std::vector<Voertuig> voertuigen;
+    std::vector<Voertuig> voertuigen; //TODO: Sla Voertuig pointers op
 public:
     Baan() : naam(), lengte() {}
     Baan(const std::string& naam, int lengte);
+
+    //TODO: Baan Destructor toevoegen die Voertuig pointers delete
 
     void update(float deltaTime_s);
 

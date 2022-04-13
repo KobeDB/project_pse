@@ -32,8 +32,10 @@ struct BaanInfo {
 struct VoertuigInfo {
     const std::string baanNaam;
     const int positie;
+    const std::string type; //TODO: dit nog uitlezen en invullen
 
     // Het definieren van een constructor DWINGT de user om alle velden te initialiseren !
+    // TODO: Hier nog string type parameter binnen nemen en invullen
     VoertuigInfo(const std::string& baanNaam, int positie) : baanNaam(baanNaam), positie(positie) {}
 };
 
