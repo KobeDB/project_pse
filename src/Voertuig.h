@@ -54,7 +54,7 @@ public:
 
     // Copy constructor nodig om initCheck op het JUISTE adres te zetten van dit NIEUWE object
     Voertuig(const Voertuig& other)
-        : baanNaam(other.baanNaam), positie(other.positie), snelheid(other.snelheid), versnelling(other.versnelling), snelheid_max(other.snelheid_max) {
+        : baanNaam(other.baanNaam), Type(other.Type), positie(other.positie), snelheid(other.snelheid), versnelling(other.versnelling), snelheid_max(other.snelheid_max) {
         _initCheck = this;
     }
 

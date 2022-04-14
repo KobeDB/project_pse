@@ -100,6 +100,7 @@ std::ostream& operator<<(std::ostream& os, const Voertuig& tuig) {
     REQUIRE(tuig.properlyInitialized(), "class not properly initialized");
 
     os << "\t\t-> baan: " << tuig.getBaanNaam() << "\n";
+    os << "\t\t-> type: " << tuig.getType() << "\n";
     os << "\t\t-> positie: " << tuig.getPositie() << "\n";
     os << "\t\t-> snelheid: " << tuig.getSnelheid();
     return os;
