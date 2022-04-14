@@ -197,6 +197,7 @@ void VerkeerssituatieReader::read(std::string situatieFile, std::ostream &errstr
         if(verkeersElementNaam == "VOERTUIG") {
             TiXmlElement* baanNaamNode = NULL;
             TiXmlElement* positieNode = NULL;
+            TiXmlElement* typeNode = NULL;
             // Deze nodes zijn niet per se in een vaste volgorde, we moeten dus met een for loop de componenten aflopen
             for(TiXmlElement* voertuigComponent = verkeersElement->FirstChildElement(); voertuigComponent != NULL;
                 voertuigComponent = voertuigComponent->NextSiblingElement())
@@ -205,8 +206,10 @@ void VerkeerssituatieReader::read(std::string situatieFile, std::ostream &errstr
                     baanNaamNode = voertuigComponent;
                 if(std::string(voertuigComponent->Value()) == "positie")
                     positieNode = voertuigComponent;
+                if(std::string(voertuigComponent->Value()) == "type")
+                    typeNode = voertuigComponent;
             }
-            if(!baanNaamNode || !positieNode) {
+            if(!baanNaamNode || !positieNode || !typeNode) {
                 errstr << "ERROR: Ontbrekende child node in VOERTUIG\n";
                 continue;
             }
@@ -220,7 +223,14 @@ void VerkeerssituatieReader::read(std::string situatieFile, std::ostream &errstr
                 continue;
             }
 
-            VoertuigInfo voertuig(baanNaam, positie);
+            std::string Type = typeNode->GetText();
+            if(Type != "auto" && Type != "bus" && Type != "brandweerwagen" && Type != "ziekenwagen" && Type != "politiecombi") {
+                errstr << "ERROR: VOERTUIG:TYPE is geen valide type\n";
+                continue;
+            }
+
+
+            VoertuigInfo voertuig(baanNaam, Type, positie);
             voertuigen.push_back(voertuig);
 
             continue;

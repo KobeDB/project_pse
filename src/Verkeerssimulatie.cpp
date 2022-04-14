@@ -42,7 +42,7 @@ Verkeerssimulatie::Verkeerssimulatie(const std::vector<BaanInfo>& pBanen, const 
         }
         for(unsigned vi = 0; vi < pVoertuigen.size(); vi++) {
             const VoertuigInfo& voertuigInfo = pVoertuigen[vi];
-            Voertuig voertuig(voertuigInfo.baanNaam, voertuigInfo.positie);
+            Voertuig voertuig(voertuigInfo.baanNaam, voertuigInfo.type, voertuigInfo.positie);
             if(voertuig.getBaanNaam() != baan.getNaam())
                 continue;
             banen[baan.getNaam()].addVoertuig(voertuig);

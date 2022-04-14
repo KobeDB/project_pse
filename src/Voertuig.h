@@ -29,6 +29,7 @@ public:
     bool properlyInitialized() const;
 private:
     std::string baanNaam;
+    std::string Type;
     int positie;
     float snelheid;
     float versnelling;
@@ -49,7 +50,7 @@ public:
      * REQUIRE(snelheid >= 0, "snelheid mag niet negatief zijn");
      * REQUIRE(!baanNaam.empty(), "baanNaam mag niet leeg zijn");
      */
-    Voertuig(const std::string &baanNaam, int positie);
+    Voertuig(const std::string &baanNaam,const std::string &Type, int positie);
 
     // Copy constructor nodig om initCheck op het JUISTE adres te zetten van dit NIEUWE object
     Voertuig(const Voertuig& other)
@@ -90,6 +91,11 @@ public:
     float getVersnelling() const {
         REQUIRE(properlyInitialized(), "class not properly initialized");
         return versnelling;
+    }
+
+    const std::string &getType() const {
+        REQUIRE(properlyInitialized(), "class not properly initialized");
+        return Type;
     }
 
     /*

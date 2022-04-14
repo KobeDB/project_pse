@@ -11,11 +11,12 @@
 
 using namespace std;
 
-Voertuig::Voertuig(const std::string &baanNaam, int positie): baanNaam(baanNaam), positie(positie), snelheid(0), versnelling(10), snelheid_max(get_V_MAX())
+Voertuig::Voertuig(const std::string &baanNaam,const std::string &Type, int positie): baanNaam(baanNaam), Type(Type), positie(positie), snelheid(0), versnelling(10), snelheid_max(get_V_MAX())
 {
     REQUIRE(positie >= 0, "positie mag niet negatief zijn");
     REQUIRE(snelheid >= 0, "snelheid mag niet negatief zijn");
     REQUIRE(!baanNaam.empty(), "baanNaam mag niet leeg zijn");
+    REQUIRE(!Type.empty(), "baanNaam mag niet leeg zijn");
 
     _initCheck = this;
     ENSURE(this->properlyInitialized(), "constructor must end in properly initialized state");
