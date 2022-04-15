@@ -11,6 +11,15 @@ Baan::Baan(const std::string& naam, int lengte) : naam(naam), lengte(lengte)
     REQUIRE(lengte > 0, "lengte moet groter zijn dan 0");
 }
 
+Baan::~Baan() {
+
+    for (std::vector<Voertuig*>::size_type i = 0; i < voertuigen.size(); i++) {
+        delete voertuigen[i];
+    }
+
+}
+
+
 std::ostream& operator<<(std::ostream& os, const Baan& baan)
 {
     for(int i = baan.voertuigen.size()-1; i >= 0 ; i--) {
@@ -45,12 +54,14 @@ const Verkeerslicht *Baan::getVolgendeLicht(int pos) const {
 }
 
 
-void Baan::addVoertuig(const Voertuig &voertuig)
+void Baan::addVoertuig(Voertuig* voertuig)
 {
+    REQUIRE(voertuig, "voertuig mag niet NULL zijn");
+
     // De verkeerslichten zijn gesorteerd op positie, van klein naar groot
     for(unsigned i = 0; i < voertuigen.size(); i++) {
-        if(voertuigen[i].getPositie() > voertuig.getPositie()) {
-            std::vector<Voertuig>::iterator it = voertuigen.begin() + i;
+        if(voertuigen[i]->getPositie() > voertuig->getPositie()) {
+            std::vector<Voertuig*>::iterator it = voertuigen.begin() + i;
             voertuigen.insert(it, voertuig);
             return;
         }
@@ -64,9 +75,9 @@ const Voertuig* Baan::getVoorligger(int pos) const {
     const Voertuig* returnval = NULL;
 
     for(unsigned i = 0; i < voertuigen.size(); i++) {
-        const Voertuig& voertuig = voertuigen[i];
-        if(pos < voertuig.getPositie()) { // We nemen meteen dit voertuig omdat onze verkeerslichten volgens afstand gesorteerd zijn
-            returnval = &voertuig;
+        const Voertuig* voertuig = voertuigen[i];
+        if(pos < voertuig->getPositie()) { // We nemen meteen dit voertuig omdat onze verkeerslichten volgens afstand gesorteerd zijn
+            returnval = voertuig;
             break;
         }
     }
@@ -83,9 +94,9 @@ void Baan::update(float deltaTime_s)
 
     // We lopen de lijst van achter naar voren af, omdat we de lijst ondertussen bewerken
     for(int i = voertuigen.size()-1; i >= 0; i--) {
-        Voertuig& tuig = voertuigen[i];
-        tuig.update(deltaTime_s, getVolgendeLicht(tuig.getPositie()), getVoorligger(tuig.getPositie()));
-        if(tuig.getPositie() > getLengte()) {
+        Voertuig* tuig = voertuigen[i];
+        tuig->update(deltaTime_s, getVolgendeLicht(tuig->getPositie()), getVoorligger(tuig->getPositie()));
+        if(tuig->getPositie() > getLengte()) {
             voertuigen.erase(voertuigen.begin() + i);
         }
     }

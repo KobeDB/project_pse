@@ -2,6 +2,7 @@
 // Created by kobedb on 17.03.22.
 //
 
+#include "VoertuigFactory.h"
 #include "Verkeerssimulatie.h"
 #include "tinyxml.h"
 
@@ -42,10 +43,13 @@ Verkeerssimulatie::Verkeerssimulatie(const std::vector<BaanInfo>& pBanen, const 
         }
         for(unsigned vi = 0; vi < pVoertuigen.size(); vi++) {
             const VoertuigInfo& voertuigInfo = pVoertuigen[vi];
-            Voertuig voertuig(voertuigInfo.baanNaam, voertuigInfo.type, voertuigInfo.positie);
-            if(voertuig.getBaanNaam() != baan.getNaam())
+            //Voertuig voertuig(voertuigInfo.baanNaam, voertuigInfo.type, voertuigInfo.positie);
+            if(voertuigInfo.baanNaam != baan.getNaam())
                 continue;
-            banen[baan.getNaam()].addVoertuig(voertuig);
+
+            //werkelijke type, afgeleide klasse van Voertuig instantieren, met de Factory
+            Voertuig* v = VoertuigFactory::getInstance()->create(voertuigInfo.type, voertuigInfo.baanNaam, voertuigInfo.positie);
+            banen[baan.getNaam()].addVoertuig(v);
         }
     }
 }

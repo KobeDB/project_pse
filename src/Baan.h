@@ -18,12 +18,13 @@ private:
     std::string naam;
     int lengte;
     std::vector<Verkeerslicht> verkeerslichten;
-    std::vector<Voertuig> voertuigen; //TODO: Sla Voertuig pointers op
+    std::vector<Voertuig*> voertuigen;
 public:
     Baan() : naam(), lengte() {}
     Baan(const std::string& naam, int lengte);
 
-    //TODO: Baan Destructor toevoegen die Voertuig pointers delete
+    // Baan destructor delete elk voertuig
+    ~Baan();
 
     void update(float deltaTime_s);
 
@@ -41,7 +42,7 @@ public:
     const Voertuig* getVoorligger(int pos) const;
 
     void addVerkeerslicht(const Verkeerslicht& licht);
-    void addVoertuig(const Voertuig& voertuig);
+    void addVoertuig(Voertuig* voertuig);
 
     /// functie om een Baan mooi af te printen
     friend std::ostream& operator<<(std::ostream& os, const Baan& baan);

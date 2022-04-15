@@ -58,10 +58,10 @@ TEST_F(BaanTest, baanHappyDay) {
     ASSERT_TRUE(licht != NULL);
     EXPECT_TRUE(licht->getPositie() == volgendLicht.getPositie());
 
-    Voertuig voorligger("Baan1", 60);
+    Voertuig* voorligger = new Voertuig("Baan1", 60);
     baan.addVoertuig(voorligger);
 
     voertuig = baan.getVoorligger(0);
     ASSERT_TRUE(voertuig != NULL);
-    EXPECT_TRUE(voertuig->getPositie() == voorligger.getPositie());
+    EXPECT_TRUE(voertuig->getPositie() == voorligger->getPositie());
 }

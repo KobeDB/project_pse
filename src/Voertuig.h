@@ -29,7 +29,6 @@ public:
     bool properlyInitialized() const;
 private:
     std::string baanNaam;
-    std::string Type;
     int positie;
     float snelheid;
     float versnelling;
@@ -50,11 +49,11 @@ public:
      * REQUIRE(snelheid >= 0, "snelheid mag niet negatief zijn");
      * REQUIRE(!baanNaam.empty(), "baanNaam mag niet leeg zijn");
      */
-    Voertuig(const std::string &baanNaam,const std::string &Type, int positie);
+    Voertuig(const std::string &baanNaam, int positie);
 
     // Copy constructor nodig om initCheck op het JUISTE adres te zetten van dit NIEUWE object
     Voertuig(const Voertuig& other)
-        : baanNaam(other.baanNaam), Type(other.Type), positie(other.positie), snelheid(other.snelheid), versnelling(other.versnelling), snelheid_max(other.snelheid_max) {
+        : baanNaam(other.baanNaam), positie(other.positie), snelheid(other.snelheid), versnelling(other.versnelling), snelheid_max(other.snelheid_max) {
         _initCheck = this;
     }
 
@@ -93,10 +92,7 @@ public:
         return versnelling;
     }
 
-    const std::string &getType() const {
-        REQUIRE(properlyInitialized(), "class not properly initialized");
-        return Type;
-    }
+    virtual std::string getType() const {return "Voertuig";} // virtual omdat de afgeleide classes dit zullen invullen
 
     /*
      *  REQUIRE(properlyInitialized(), "class not properly initialized");

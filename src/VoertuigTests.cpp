@@ -10,6 +10,7 @@
 // Description : Verkeerssimulatie in C++, Ansi-style
 //============================================================================
 
+#include "VoertuigFactory.h"
 #include <iostream>
 #include <gtest/gtest.h>
 #include <vector>
@@ -53,11 +54,11 @@ TEST_F(VoertuigTest, DefaultConstructor) {
 
 // Tests the "happy day" scenario
 TEST_F(VoertuigTest, HappyDay1VoertuigZonderLichten) {
-    Voertuig voertuig("Baan1", 10);
-    voertuig.update(1, NULL, NULL);
-    EXPECT_NEAR(voertuig.getPositie(), 20, 1);
-    EXPECT_NEAR(voertuig.getSnelheid(), 10, 1);
-    EXPECT_NEAR(voertuig.getVersnelling(), 1.25, 1);
+    Voertuig* voertuig = VoertuigFactory::getInstance()->create("auto", "Baan1", 10);
+    voertuig->update(1, NULL, NULL);
+    EXPECT_NEAR(voertuig->getPositie(), 20, 1);
+    EXPECT_NEAR(voertuig->getSnelheid(), 10, 1);
+    EXPECT_NEAR(voertuig->getVersnelling(), 1.25, 1);
 }
 
 // Tests the "happy day" scenario
