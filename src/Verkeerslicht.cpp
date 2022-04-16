@@ -6,7 +6,7 @@
 
 #include <string>
 #include <iostream>
-#include "DesignByContract.h"
+#include "test_utils/DesignByContract.h"
 
 using namespace std;
 

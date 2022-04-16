@@ -17,7 +17,7 @@
 #include "Verkeerssimulatie.h"
 #include "VerkeerssituatieReader.h"
 
-#include "TicTacToeUtils.h"
+#include "test_utils/TicTacToeUtils.h"
 
 class VerkeerssimulatieInputTest: public ::testing::Test {
 protected:

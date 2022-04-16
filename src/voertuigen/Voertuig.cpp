@@ -5,9 +5,9 @@
 #include "Voertuig.h"
 #include <cmath>
 
-#include "DesignByContract.h"
+#include "../test_utils/DesignByContract.h"
 
-#include "Baan.h"
+#include "../Baan.h"
 
 using namespace std;
 

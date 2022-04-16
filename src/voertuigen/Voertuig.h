@@ -8,9 +8,9 @@
 #include <string>
 #include <iostream>
 #include <map>
-#include "DesignByContract.h"
+#include "../test_utils/DesignByContract.h"
 
-#include "Baan.h"
+#include "../Baan.h"
 
 // -Niet meer nodig- Walgelijke macros omdat c++98 (alleszins mijn compiler) geen const members wil initializen :(
 //#define V_MAX 16.6f

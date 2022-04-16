@@ -19,7 +19,7 @@
 
 #include "Verkeerslicht.h"
 
-#include "TicTacToeUtils.h"
+#include "test_utils/TicTacToeUtils.h"
 
 class BaanTest: public ::testing::Test {
 protected:

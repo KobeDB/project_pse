@@ -11,7 +11,7 @@
 
 #include "Baan.h"
 #include "Verkeerslicht.h"
-#include "Voertuig.h"
+#include "voertuigen/Voertuig.h"
 
 
 /// Hulp data structuren nodig om de xml file informatie om te zetten in concrete c++ data structuren

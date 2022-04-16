@@ -9,7 +9,7 @@
 #include <string>
 #include <algorithm>
 
-#include "Auto.h"
+#include "voertuigen/Auto.h"
 
 
 //Een VoertuigFactory om zeer gemakkelijk van een voertuig-type(in string formaat) de juiste afgeleide klasse van Voertuig te instantieren.

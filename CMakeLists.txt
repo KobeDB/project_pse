@@ -14,45 +14,45 @@ link_directories(gtest/lib)
 # Set source files for RELEASE target
 set(RELEASE_SOURCE_FILES
         src/main.cpp
-        src/tinystr.cpp
-        src/tinyxmlerror.cpp
-        src/tinystr.h
-        src/tinyxml.h
-        src/tinyxml.cpp
-        src/tinyxmlparser.cpp
+        src/tinyxml/tinystr.cpp
+        src/tinyxml/tinyxmlerror.cpp
+        src/tinyxml/tinystr.h
+        src/tinyxml/tinyxml.h
+        src/tinyxml/tinyxml.cpp
+        src/tinyxml/tinyxmlparser.cpp
         src/Baan.cpp
         src/Baan.h
         src/Verkeerslicht.cpp
         src/Verkeerslicht.h
         src/Verkeerssimulatie.cpp
         src/Verkeerssimulatie.h
-        src/Voertuig.cpp
-        src/Voertuig.h src/VerkeerssituatieReader.cpp src/VerkeerssituatieReader.h
-        src/TicTacToeUtils.cpp
-        src/TicTacToeUtils.h
-        src/Prioriteitsvoertuig.cpp src/Prioriteitsvoertuig.h src/Auto.cpp src/Auto.h src/VoertuigFactory.cpp src/VoertuigFactory.h)
+        src/voertuigen/Voertuig.cpp
+        src/voertuigen/Voertuig.h src/VerkeerssituatieReader.cpp src/VerkeerssituatieReader.h
+        src/test_utils/TicTacToeUtils.cpp
+        src/test_utils/TicTacToeUtils.h
+        src/Prioriteitsvoertuig.cpp src/Prioriteitsvoertuig.h src/voertuigen/Auto.cpp src/voertuigen/Auto.h src/VoertuigFactory.cpp src/VoertuigFactory.h src/voertuigen/Brandweerwagen.cpp src/voertuigen/Brandweerwagen.h src/voertuigen/Politiecombi.cpp src/voertuigen/Politiecombi.h src/voertuigen/Ziekenwagen.cpp src/voertuigen/Ziekenwagen.h src/voertuigen/Bus.cpp src/voertuigen/Bus.h)
 
 # Set source files for RELEASE target
 set(DEBUG_SOURCE_FILES
         src/VerkeerssimulatieTests.cpp
-        src/tinystr.cpp
-        src/tinyxmlerror.cpp
-        src/tinystr.h
-        src/tinyxml.h
-        src/tinyxml.cpp
-        src/tinyxmlparser.cpp
+        src/tinyxml/tinystr.cpp
+        src/tinyxml/tinyxmlerror.cpp
+        src/tinyxml/tinystr.h
+        src/tinyxml/tinyxml.h
+        src/tinyxml/tinyxml.cpp
+        src/tinyxml/tinyxmlparser.cpp
         src/Baan.cpp
         src/Baan.h
         src/Verkeerslicht.cpp
         src/Verkeerslicht.h
         src/Verkeerssimulatie.cpp
         src/Verkeerssimulatie.h
-        src/Voertuig.cpp
-        src/Voertuig.h
+        src/voertuigen/Voertuig.cpp
+        src/voertuigen/Voertuig.h
         src/VerkeerssituatieReader.cpp src/VerkeerssituatieReader.h
-        src/TicTacToeUtils.cpp
-        src/TicTacToeUtils.h
-        src/VoertuigTests.cpp src/VerkeerslichtTests.cpp src/BaanTests.cpp src/Prioriteitsvoertuig.cpp src/Prioriteitsvoertuig.h src/Auto.cpp src/Auto.h src/VoertuigFactory.cpp src/VoertuigFactory.h)
+        src/test_utils/TicTacToeUtils.cpp
+        src/test_utils/TicTacToeUtils.h
+        src/VoertuigTests.cpp src/VerkeerslichtTests.cpp src/BaanTests.cpp src/Prioriteitsvoertuig.cpp src/Prioriteitsvoertuig.h src/voertuigen/Auto.cpp src/voertuigen/Auto.h src/VoertuigFactory.cpp src/VoertuigFactory.h src/voertuigen/Brandweerwagen.cpp src/voertuigen/Brandweerwagen.h src/voertuigen/Bus.cpp src/voertuigen/Bus.h src/voertuigen/Politiecombi.cpp src/voertuigen/Politiecombi.h src/voertuigen/Ziekenwagen.cpp src/voertuigen/Ziekenwagen.h)
 
 # Create RELEASE target
 add_executable(project_pse ${RELEASE_SOURCE_FILES})

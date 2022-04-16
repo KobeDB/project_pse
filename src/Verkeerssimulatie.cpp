@@ -4,7 +4,7 @@
 
 #include "VoertuigFactory.h"
 #include "Verkeerssimulatie.h"
-#include "tinyxml.h"
+#include "tinyxml/tinyxml.h"
 
 #include <algorithm>
 #include <sstream>

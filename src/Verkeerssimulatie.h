@@ -11,7 +11,7 @@
 
 #include "Baan.h"
 #include "Verkeerslicht.h"
-#include "Voertuig.h"
+#include "voertuigen/Voertuig.h"
 
 #include "VerkeerssituatieReader.h"
 

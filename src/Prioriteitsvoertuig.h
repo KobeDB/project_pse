@@ -5,7 +5,7 @@
 #ifndef PROJECT_PSE_PRIORITEITSVOERTUIG_H
 #define PROJECT_PSE_PRIORITEITSVOERTUIG_H
 
-#include "Voertuig.h"
+#include "voertuigen/Voertuig.h"
 
 class Prioriteitsvoertuig : public Voertuig {
 public:

@@ -11,6 +11,7 @@
 class Auto : public Voertuig {
 public:
     Auto(const std::string &baanNaam, int positie) : Voertuig(baanNaam, positie) {}
+    void update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger);
     std::string getType() const {return "auto";} // overridden van de Base class
 };
 

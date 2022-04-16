@@ -3,12 +3,12 @@
 #include <map>
 #include <vector>
 #include <unistd.h>
-#include "tinyxml.h"
+#include "tinyxml/tinyxml.h"
 
 #include "Verkeerslicht.h"
 #include "Baan.h"
 #include "Verkeerssimulatie.h"
-#include "Voertuig.h"
+#include "voertuigen/Voertuig.h"
 #include "VerkeerssituatieReader.h"
 
 

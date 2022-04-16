@@ -4,7 +4,7 @@
 
 #include "VerkeerssituatieReader.h"
 
-#include "tinyxml.h"
+#include "tinyxml/tinyxml.h"
 #include <sstream>
 #include <algorithm>
 

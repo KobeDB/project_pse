@@ -22,10 +22,10 @@
 #include "Verkeerssimulatie.h"
 #include "VerkeerssituatieReader.h"
 
-#include "Voertuig.h"
+#include "voertuigen/Voertuig.h"
 #include "Baan.h"
 
-#include "TicTacToeUtils.h"
+#include "test_utils/TicTacToeUtils.h"
 
 class VoertuigTest: public ::testing::Test {
 protected:
