@@ -48,10 +48,19 @@ struct VerkeerslichtInfo {
     VerkeerslichtInfo(const std::string& baanNaam, int positie, int cyclus) : baanNaam(baanNaam), positie(positie), cyclus(cyclus) {}
 };
 
+struct VoertuiggeneratorInfo {
+    const std::string baanNaam;
+    const std::string type;
+    const int frequentie;
+
+    VoertuiggeneratorInfo(const std::string& baanNaam, const std::string& type, int frequentie) : baanNaam(baanNaam), type(type), frequentie(frequentie) {}
+};
+
 class VerkeerssituatieReader {
     std::vector<BaanInfo> banen;
     std::vector<VerkeerslichtInfo> verkeerslichten;
     std::vector<VoertuigInfo> voertuigen;
+    std::vector<VoertuiggeneratorInfo> Generatoren;
 public:
     VerkeerssituatieReader(std::string situatieFile, std::ostream& errstr);
 

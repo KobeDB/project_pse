@@ -19,4 +19,9 @@
         <positie>20</positie>
         <type>bus</type>
     </VOERTUIG>
+    <VOERTUIGGENERATOR>
+        <baan>Middelheimlaan</baan>
+        <type>bus</type>
+        <frequentie>5</frequentie>
+    </VOERTUIGGENERATOR>
 </VERKEERSSITUATIE>

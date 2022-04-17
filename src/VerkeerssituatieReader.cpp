@@ -235,6 +235,46 @@ void VerkeerssituatieReader::read(std::string situatieFile, std::ostream &errstr
 
             continue;
         }
+        if(verkeersElementNaam == "VOERTUIGGENERATOR") {
+            TiXmlElement* naamNode = NULL;
+            TiXmlElement* frequentieNode = NULL;
+            TiXmlElement* typeNode = NULL;
+            // Deze nodes zijn niet per se in een vaste volgorde, we moeten dus met een for loop de componenten aflopen
+            for(TiXmlElement* verkeerslichtComponent = verkeersElement->FirstChildElement(); verkeerslichtComponent != NULL;
+                verkeerslichtComponent = verkeerslichtComponent->NextSiblingElement())
+            {
+                if(std::string(verkeerslichtComponent->Value()) == "baan") // cast de Value naar string, anders werkt dit niet
+                    naamNode = verkeerslichtComponent;
+                if(std::string(verkeerslichtComponent->Value()) == "type")
+                    typeNode = verkeerslichtComponent;
+                if(std::string(verkeerslichtComponent->Value()) == "frequentie")
+                    frequentieNode = verkeerslichtComponent;
+            }
+            if(!naamNode || !typeNode || !frequentieNode) {
+                errstr << "Ontbrekende child node in VERKEERSLICHT\n";
+                continue;
+            }
+
+            std::string naam = naamNode->GetText();
+
+            bool success;
+            int frequentie = tryParseInt(frequentieNode->GetText(), success);
+            if(!success) {
+                errstr << "VERKEERSLICHT:FREQUENTIE is geen getal\n";
+                continue;
+            }
+
+            std::string Type = typeNode->GetText();
+            if(Type != "auto" && Type != "bus" && Type != "brandweerwagen" && Type != "ziekenwagen" && Type != "politiecombi") {
+                errstr << "ERROR: VOERTUIG:TYPE is geen valide type\n";
+                continue;
+            }
+
+            VoertuiggeneratorInfo voertuiggenerator(naam, Type, frequentie);
+            Generatoren.push_back(voertuiggenerator);
+            continue;
+        }
         errstr << "Onherkenbaar element: " << verkeersElementNaam << "\n";
     }
+
 }
