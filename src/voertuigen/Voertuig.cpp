@@ -74,12 +74,12 @@ void Voertuig::updateVersnelling(const Voertuig* voorligger)
     versnelling = get_VERSNELLING_MAX() * (1 - pow((snelheid / snelheid_max), 4) - pow(delta, 2));
 }
 
-void Voertuig::vertraag()
+void Voertuig::stop()
 {
     versnelling = -get_REMFACTOR_MAX() * snelheid / snelheid_max;
 }
 
-void Voertuig::stop()
+void Voertuig::vertraag()
 {
     snelheid_max = get_VERTRAAGFACTOR() * get_V_MAX();
 }
