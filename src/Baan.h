@@ -46,6 +46,8 @@ public:
 
     /// functie om een Baan mooi af te printen
     friend std::ostream& operator<<(std::ostream& os, const Baan& baan);
+
+    void teken(std::ostream& os) const;
 };
 
 

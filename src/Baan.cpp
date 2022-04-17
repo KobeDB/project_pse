@@ -106,3 +106,42 @@ bool Baan::done() const {
     return voertuigen.empty();
 }
 
+void Baan::teken(std::ostream& os) const {
+    std::string baanNaamStr = getNaam();
+    std::string verkeerslichtenStr = " >verkeerslichten";
+    int width = std::max(baanNaamStr.size(), verkeerslichtenStr.size());
+
+    os << baanNaamStr;
+    for(int i = baanNaamStr.size(); i < width; i++) { os << " "; }
+
+    os << "| ";
+    int baanPos = 0;
+    for(std::vector<Voertuig*>::size_type i = 0; i < voertuigen.size(); i++) {
+        const Voertuig* voertuig = voertuigen[i];
+        for(; baanPos < voertuig->getPositie(); baanPos++) {
+            os << "=";
+        }
+        std::string voertuigType = voertuig->getType();
+        if(voertuigType.empty()) {std::cerr << "Baan::teken : voertuig heeft geen grafische voorstelling;\n";}
+        os << (char)(toupper(voertuig->getType()[0]));
+    }
+    for(; baanPos < getLengte(); baanPos++) {
+        os << "=";
+    }
+    os << "\n";
+
+    os << verkeerslichtenStr;
+    for(int i = verkeerslichtenStr.size(); i < width; i++) { os << " "; }
+    os << "| ";
+    baanPos = 0;
+    for(std::vector<Verkeerslicht*>::size_type i = 0; i < verkeerslichten.size(); i++) {
+        const Verkeerslicht& verkeerslicht = verkeerslichten[i];
+        for(; baanPos < verkeerslicht.getPositie(); baanPos++) {
+            os << " ";
+        }
+        os << (verkeerslicht.isRood()? "R" : "G");
+    }
+
+    os << "\n";
+}
+
