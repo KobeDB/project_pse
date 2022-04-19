@@ -25,15 +25,15 @@ int main() {
     std::cout << "SIMULATIE: \n";
     std::cout << simulatie << "\n";
     float time = 0;
-    for(int i = 0; i < 100; i++) { // We stoppen na 100 updates als simulatie blijft hangen
-        float deltaTime_s = 1;
+    for(int i = 0; i < 1000000; i++) { // We stoppen na 100 updates als simulatie blijft hangen
+        float deltaTime_s = 0.5;
         usleep((int)(deltaTime_s * 1000)); // usleep uses microseconds, adjust scaling factor to let the simulation-'seconds' tick faster
         time += deltaTime_s;
         simulatie.update(deltaTime_s);
         if(simulatie.done())
             break;
         std::cout << "\tTijd: " << time << "\n";
-        std::cout << simulatie << "\n";
+        //std::cout << simulatie << "\n";
     }
 
     return 0;
