@@ -3,6 +3,7 @@
 //
 
 #include "Baan.h"
+#include "Voertuig_generator.h"
 #include "voertuigen/Voertuig.h"
 
 Baan::Baan(const std::string& naam, int lengte) : naam(naam), lengte(lengte)

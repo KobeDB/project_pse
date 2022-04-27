@@ -26,6 +26,7 @@ Voertuig_generator::Voertuig_generator(const std::string &baan, const std::strin
 void Voertuig_generator::getTypeLen() {
     Voertuig* t = VoertuigFactory::getInstance()->create(this->type, this->baan, 0);
     tLen = t->get_VOERTUIG_LENGTE();
+    delete t;
 }
 
 const std::string &Voertuig_generator::getType() const {
