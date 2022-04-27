@@ -5,9 +5,29 @@
 #ifndef PROJECT_PSE_VOERTUIG_GENERATOR_H
 #define PROJECT_PSE_VOERTUIG_GENERATOR_H
 
+#include <iostream>
+#include "Baan.h"
 
 class Voertuig_generator {
+private:
+    std::string baan;
+    std::string type;
+    int cyclus;
+    float timer_s;
+    int tLen;
 
+public:
+    Voertuig_generator(const std::string &baan, const std::string &type, int cyclus);
+
+    void getTypeLen();
+
+    const std::string getBaan() const;
+
+    const std::string &getType() const;
+
+    int getCyclus() const;
+
+    void update(float deltaTime_s, Baan* nugget);
 };
 
 

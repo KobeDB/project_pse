@@ -251,7 +251,7 @@ void VerkeerssituatieReader::read(std::string situatieFile, std::ostream &errstr
                     frequentieNode = verkeerslichtComponent;
             }
             if(!naamNode || !typeNode || !frequentieNode) {
-                errstr << "Ontbrekende child node in VERKEERSLICHT\n";
+                errstr << "Ontbrekende child node in VOERTUIGGENERATOR\n";
                 continue;
             }
 
@@ -260,7 +260,7 @@ void VerkeerssituatieReader::read(std::string situatieFile, std::ostream &errstr
             bool success;
             int frequentie = tryParseInt(frequentieNode->GetText(), success);
             if(!success) {
-                errstr << "VERKEERSLICHT:FREQUENTIE is geen getal\n";
+                errstr << "VOERTUIGGENERATOR:FREQUENTIE is geen getal\n";
                 continue;
             }
 
