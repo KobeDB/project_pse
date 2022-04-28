@@ -12,16 +12,16 @@
     <VOERTUIG>
         <baan>Middelheimlaan</baan>
         <positie>0</positie>
-        <type>bus</type>
+        <type>auto</type>
     </VOERTUIG>
     <VOERTUIG>
         <baan>Middelheimlaan</baan>
         <positie>20</positie>
-        <type>bus</type>
+        <type>auto</type>
     </VOERTUIG>
     <VOERTUIGGENERATOR>
         <baan>Middelheimlaan</baan>
-        <type>auto</type>
+        <type>bus</type>
         <frequentie>5</frequentie>
     </VOERTUIGGENERATOR>
 </VERKEERSSITUATIE>

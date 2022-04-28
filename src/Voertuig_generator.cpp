@@ -37,7 +37,7 @@ void Voertuig_generator::update(float deltaTime_s, Baan* nugget) {
     timer_s += deltaTime_s;
     if (timer_s >= (float) cyclus) {
         timer_s = (int) (timer_s + deltaTime_s + 0.5f) % cyclus;
-        const Voertuig* chicken = nugget->getVoorligger(0);
+        const Voertuig* chicken = nugget->getFirstCar();
         int cPos = chicken->getPositie();
         if(cPos >= (chicken->get_VOERTUIG_LENGTE() * 2)) {
             Voertuig* V = VoertuigFactory::getInstance()->create(this->type, this->baan, 0);

@@ -40,6 +40,7 @@ public:
      * ENSURE(returnval == NULL || pos < returnval->getPositie(), "POST: returnval is geen voorligger")
      */
     const Voertuig* getVoorligger(int pos) const;
+    const Voertuig* getFirstCar() const;
 
     void addVerkeerslicht(const Verkeerslicht& licht);
     void addVoertuig(Voertuig* voertuig);

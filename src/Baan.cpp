@@ -86,6 +86,11 @@ const Voertuig* Baan::getVoorligger(int pos) const {
     return returnval;
 }
 
+const Voertuig* Baan::getFirstCar() const {
+    if(voertuigen.size() <= 0) return NULL;
+    return voertuigen[0];
+}
+
 void Baan::update(float deltaTime_s)
 {
     for(unsigned i = 0; i < verkeerslichten.size(); i++) {

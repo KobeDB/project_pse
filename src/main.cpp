@@ -23,7 +23,7 @@ int main() {
     float time = 0;
     for(int i = 0; i < 10000; i++) { // We stoppen na 100 updates als simulatie blijft hangen
         if(time > 158) {
-            cout << "big ballz";
+            //cout << "big ballz";
         }
         float deltaTime_s = 0.016;
 //        usleep((int)(deltaTime_s * 1000)); // usleep uses microseconds, adjust scaling factor to let the simulation-'seconds' tick faster
