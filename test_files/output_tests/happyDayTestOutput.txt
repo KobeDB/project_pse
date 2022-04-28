@@ -1,60 +1,30 @@
 	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 50
-		-> snelheid: 10
+0x5578a09f1e40
 
 	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 61
-		-> snelheid: 11.2504
+0x5578a09f1e40
 
 	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 73
-		-> snelheid: 12.3866
+0x5578a09f1e40
 
 	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 86
-		-> snelheid: 13.3801
+0x5578a09f1e40
 
 	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 100
-		-> snelheid: 14.2123
+0x5578a09f1e40
 
 	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 114
-		-> snelheid: 14.8786
+0x5578a09f1e40
 
 	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 129
-		-> snelheid: 15.3892
+0x5578a09f1e40
 
 	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 144
-		-> snelheid: 15.7656
+0x5578a09f1e40
 
 	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 160
-		-> snelheid: 16.034
+0x5578a09f1e40
 
 	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 176
-		-> snelheid: 16.2206
+0x5578a09f1e40
 

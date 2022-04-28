@@ -27,7 +27,10 @@ std::ostream &operator<<(std::ostream &os, const Verkeerssimulatie &sim)
     return os;
 }
 
-Verkeerssimulatie::Verkeerssimulatie(const std::vector<BaanInfo>& pBanen, const std::vector<VerkeerslichtInfo>& pLichten, const std::vector<VoertuigInfo>& pVoertuigen)
+Verkeerssimulatie::Verkeerssimulatie(const std::vector<BaanInfo>& pBanen,
+                                     const std::vector<VerkeerslichtInfo>& pLichten,
+                                     const std::vector<VoertuigInfo>& pVoertuigen,
+                                     const std::vector<VoertuiggeneratorInfo>& pGeneratoren)
                                      : banen()
                                      {
     for(unsigned b = 0; b < pBanen.size(); b++) {
@@ -51,6 +54,10 @@ Verkeerssimulatie::Verkeerssimulatie(const std::vector<BaanInfo>& pBanen, const 
             Voertuig* v = VoertuigFactory::getInstance()->create(voertuigInfo.type, voertuigInfo.baanNaam, voertuigInfo.positie);
             banen[baan.getNaam()].addVoertuig(v);
         }
+
+        for(std::vector<VoertuiggeneratorInfo>::size_type i = 0; i < pGeneratoren.size(); i++) {
+            generatoren.push_back(Voertuig_generator(pGeneratoren[i].baanNaam, pGeneratoren[i].type, pGeneratoren[i].frequentie));
+        }
     }
 }
 
@@ -59,6 +66,11 @@ void Verkeerssimulatie::update(float deltaTime_s)
     using namespace std;
     for(map<string,Baan>::iterator it = banen.begin(); it != banen.end(); it++) {
         it->second.update(deltaTime_s);
+    }
+
+    for(std::vector<VoertuiggeneratorInfo>::size_type i = 0; i < generatoren.size(); i++) {
+        Voertuig_generator& generator = generatoren[i];
+        generator.update(deltaTime_s, &banen[generator.getBaan()]);
     }
 }
 

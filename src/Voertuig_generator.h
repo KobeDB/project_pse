@@ -14,14 +14,11 @@ private:
     std::string type;
     int cyclus;
     float timer_s;
-    int tLen;
 
 public:
     Voertuig_generator(const std::string &baan, const std::string &type, int cyclus);
 
-    void getTypeLen();
-
-    const std::string getBaan() const;
+    const std::string& getBaan() const;
 
     const std::string &getType() const;
 

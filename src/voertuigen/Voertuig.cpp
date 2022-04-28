@@ -54,12 +54,12 @@ void Voertuig::updatePositieEnSnelheid(float deltaTime_s)
 {
     float nieuweSnelheid = snelheid + deltaTime_s * versnelling;
     if(nieuweSnelheid < 0 ) {
-        positie = (int)((float)positie - pow(snelheid, 2) / (2 * versnelling));
+        positie = ((float)positie - pow(snelheid, 2) / (2 * versnelling));
         snelheid = 0;
     }
     else {
         snelheid = nieuweSnelheid;
-        positie += (int)(snelheid * deltaTime_s);
+        positie += (snelheid * deltaTime_s);
     }
 }
 

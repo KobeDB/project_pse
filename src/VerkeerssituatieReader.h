@@ -65,13 +65,14 @@ public:
     VerkeerssituatieReader(std::string situatieFile, std::ostream& errstr);
 
 private:
-    void read(std::string situatieFile, std::ostream &errstr);
+    void read(const std::string& situatieFile, std::ostream &errstr);
     void checkConsistency(std::ostream& errstr);
 
 public:
     const std::vector<BaanInfo>& getBanen() {return banen;}
     const std::vector<VerkeerslichtInfo>& getVerkeerslichten() {return verkeerslichten;}
     const std::vector<VoertuigInfo>& getVoertuigen() {return voertuigen;}
+    const std::vector<VoertuiggeneratorInfo>& getVoertuiggeneratoren() {return Generatoren;}
 };
 
 

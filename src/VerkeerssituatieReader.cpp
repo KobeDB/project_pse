@@ -5,6 +5,7 @@
 #include "VerkeerssituatieReader.h"
 
 #include "tinyxml/tinyxml.h"
+#include "VoertuigFactory.h"
 #include <sstream>
 #include <algorithm>
 
@@ -103,10 +104,29 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
         }
     }
 
+    for(int i = 0; i < (int) Generatoren.size(); i++){
+        const VoertuiggeneratorInfo& generatorInfo = Generatoren[i];
 
+        if(generatorInfo.frequentie <= 0) {
+            errstr << "Voertuiggenerator: frequentie mag niet 0 of negatief zijn\n";
+        }
+
+        if(!VoertuigFactory::getInstance()->isValidType(generatorInfo.type)) {
+            errstr << "Voertuiggenerator: type is niet valid\n";
+        }
+
+        bool baanExists = false;
+        for(int j = 0; j < (int) banen.size(); j++) {
+            if(banen[j].naam == generatorInfo.baanNaam)
+                baanExists = true;
+        }
+        if(!baanExists) {
+            errstr << "Voertuiggenerator: baan van generator bestaat niet\n";
+        }
+    }
 }
 
-void VerkeerssituatieReader::read(std::string situatieFile, std::ostream &errstr)
+void VerkeerssituatieReader::read(const std::string& situatieFile, std::ostream &errstr)
 {
     using namespace std;
     TiXmlDocument doc;

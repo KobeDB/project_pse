@@ -15,12 +15,14 @@
 
 #include "VerkeerssituatieReader.h"
 
+#include "Voertuig_generator.h"
+
 class Verkeerssimulatie {
 private:
-
     std::map<std::string, Baan> banen; // Hiermee kunnen we aan de Baan objecten met hun namen als key
+    std::vector<Voertuig_generator> generatoren;
 public:
-    Verkeerssimulatie(const std::vector<BaanInfo>& banen, const std::vector<VerkeerslichtInfo>& lichten, const std::vector<VoertuigInfo>& voertuigen);
+    Verkeerssimulatie(const std::vector<BaanInfo>& banen, const std::vector<VerkeerslichtInfo>& lichten, const std::vector<VoertuigInfo>& voertuigen, const std::vector<VoertuiggeneratorInfo>& pGeneratoren);
 
     void update(float deltaTime_s);
     bool done() const;

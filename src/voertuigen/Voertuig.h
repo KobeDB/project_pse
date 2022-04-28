@@ -29,7 +29,7 @@ public:
     bool properlyInitialized() const;
 private:
     std::string baanNaam;
-    int positie;
+    float positie;
     float snelheid;
     float versnelling;
     float snelheid_max; // Dit is niet constant omdat dit wordt herberekend bij het vertragen

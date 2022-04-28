@@ -148,3 +148,4 @@ void Baan::teken(std::ostream& os) const {
     os << "\n";
 }
 
+
