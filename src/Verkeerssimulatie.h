@@ -27,6 +27,7 @@ public:
     void update(float deltaTime_s);
     bool done() const;
 
+    void teken(std::ostream& os);
     friend std::ostream& operator<<(std::ostream& os, const Verkeerssimulatie& sim);
 };
 

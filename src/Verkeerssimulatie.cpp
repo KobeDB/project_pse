@@ -84,6 +84,12 @@ bool Verkeerssimulatie::done() const {
     return true;
 }
 
+void Verkeerssimulatie::teken(std::ostream &os) {
+    for(std::map<std::string, Baan>::iterator it = banen.begin(); it != banen.end(); it++) {
+        it->second.teken(os);
+    }
+}
+
 //int tryParseInt(const std::string& s, bool& success)
 //{
 //    std::stringstream iss(s);

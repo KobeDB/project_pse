@@ -22,16 +22,20 @@ int main() {
     std::cout << simulatie << "\n";
     float time = 0;
     for(int i = 0; i < 10000; i++) { // We stoppen na 100 updates als simulatie blijft hangen
-        if(time > 158) {
-            //cout << "big ballz";
-        }
+
         float deltaTime_s = 0.016;
 //        usleep((int)(deltaTime_s * 1000)); // usleep uses microseconds, adjust scaling factor to let the simulation-'seconds' tick faster
         time += deltaTime_s;
         simulatie.update(deltaTime_s);
         if(simulatie.done())
             break;
-        std::cout << "\tTijd: " << time << "\n";
+
+        // Print de situatie af om de zoveel stappen
+        if(i%100 == 0) {
+            std::cout << "\tTijd: " << time << "\n";
+            simulatie.teken(cout);
+        }
+
         //std::cout << simulatie << "\n";
     }
 

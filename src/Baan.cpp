@@ -106,8 +106,6 @@ void Baan::update(float deltaTime_s)
             voertuigen.erase(voertuigen.begin() + i);
         }
     }
-
-    teken(std::cout);
 }
 
 bool Baan::done() const {
