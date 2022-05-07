@@ -42,6 +42,8 @@ public:
     const Voertuig* getVoorligger(int pos) const;
     const Voertuig* getFirstCar() const;
 
+    int getVoertuigenAmt() const { return voertuigen.size(); }
+
     void addVerkeerslicht(const Verkeerslicht& licht);
     void addVoertuig(Voertuig* voertuig);
 

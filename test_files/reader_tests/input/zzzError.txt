@@ -1,1 +1,1 @@
-Verkeerslicht 1 too close to Verkeerslicht 0
+VOERTUIGGENERATOR:FREQUENTIE is geen getal
