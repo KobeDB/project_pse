@@ -12,12 +12,12 @@
     <VOERTUIG>
         <baan>Middelheimlaan</baan>
         <positie>0</positie>
-        <type>auto</type>
+        <type>politiecombi</type>
     </VOERTUIG>
     <VOERTUIG>
         <baan>Middelheimlaan</baan>
         <positie>20</positie>
-        <type>auto</type>
+        <type>politiecombi</type>
     </VOERTUIG>
     <VOERTUIGGENERATOR>
         <baan>Middelheimlaan</baan>

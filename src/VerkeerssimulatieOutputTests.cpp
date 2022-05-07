@@ -49,7 +49,10 @@ TEST_F(VerkeerssimulatieOutputTest, OutputHappyDay) {
     VoertuigInfo auto1(baan1.naam, "auto", 40);
     voertuigen.push_back(auto1);
 
-    Verkeerssimulatie verkeerssimulatie(banen, lichten, voertuigen);
+    vector<VoertuiggeneratorInfo> generatoren;
+    generatoren.push_back(VoertuiggeneratorInfo(baan1.naam, "bus", 5));
+
+    Verkeerssimulatie verkeerssimulatie(banen, lichten, voertuigen, generatoren);
 
     ofstream testOutput("output_tests/happyDayTestOutput.txt");
     if(!testOutput) cerr << "happyDayOutputTest: kan output file niet openen\n";
@@ -62,4 +65,34 @@ TEST_F(VerkeerssimulatieOutputTest, OutputHappyDay) {
     }
     testOutput.close();
     EXPECT_TRUE(FileCompare("output_tests/happyDayExpectedOut.txt", "output_tests/happyDayTestOutput.txt"));
+}
+
+TEST_F(VerkeerssimulatieOutputTest, tekenTest) {
+    vector<BaanInfo> banen;
+    BaanInfo baan1 ("Baan1", 200);
+    banen.push_back(baan1);
+
+    vector<VerkeerslichtInfo> lichten;
+    VerkeerslichtInfo licht(baan1.naam, 100, 5);
+
+    vector<VoertuigInfo> voertuigen;
+    VoertuigInfo auto1(baan1.naam, "auto", 40);
+    voertuigen.push_back(auto1);
+
+    vector<VoertuiggeneratorInfo> generatoren;
+    generatoren.push_back(VoertuiggeneratorInfo(baan1.naam, "bus", 5));
+
+    Verkeerssimulatie verkeerssimulatie(banen, lichten, voertuigen, generatoren);
+
+    ofstream testOutput("output_tests/happyDayTekenTestOutput.txt");
+    if(!testOutput) cerr << "happyDayTekenOutputTest: kan output file niet openen\n";
+
+    const int stappen = 10;
+    const float tijdstap_s = 1;
+    for(int i = 0; i < stappen; i++) {
+        verkeerssimulatie.update(tijdstap_s);
+        verkeerssimulatie.teken(testOutput);
+    }
+    testOutput.close();
+    EXPECT_TRUE(FileCompare("output_tests/happyDayTekenExpectedOut.txt", "output_tests/happyDayTekenTestOutput.txt"));
 }

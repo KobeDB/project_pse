@@ -22,6 +22,9 @@ public:
     Ziekenwagen(const std::string& baanNaam, int positie) : Prioriteitsvoertuig(baanNaam, positie) {}
 
     void update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger);
+
+    std::string getType() const {return "ziekenwagen";} // overridden van de Base class
+
 };
 
 

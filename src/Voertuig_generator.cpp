@@ -15,6 +15,9 @@ using namespace std;
 Voertuig_generator::Voertuig_generator(const std::string &baan, const std::string &type, int cyclus) : baan(baan),
                                                                                                        type(type),
                                                                                                        cyclus(cyclus) {
+    REQUIRE(cyclus > 0, "cyclus mag niet 0 of negatief zijn");
+    REQUIRE(!baan.empty(), "baanNaam mag niet leeg zijn");
+    REQUIRE(!type.empty(), "type mag niet leeg zijn");
 }
 
 

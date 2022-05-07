@@ -11,7 +11,7 @@
 
 using namespace std;
 
-Voertuig::Voertuig(const std::string &baanNaam, int positie): baanNaam(baanNaam), positie(positie), snelheid(0), versnelling(10), snelheid_max(get_V_MAX())
+Voertuig::Voertuig(const std::string &baanNaam, int positie): baanNaam(baanNaam), positie(positie), snelheid(0), versnelling(0), snelheid_max(get_V_MAX())
 {
     REQUIRE(positie >= 0, "positie mag niet negatief zijn");
     REQUIRE(snelheid >= 0, "snelheid mag niet negatief zijn");

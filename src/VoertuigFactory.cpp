@@ -4,6 +4,8 @@
 
 #include "VoertuigFactory.h"
 
+#include "test_utils/DesignByContract.h"
+
 #include "voertuigen/Voertuig.h"
 #include "voertuigen/Brandweerwagen.h"
 #include "voertuigen/Bus.h"
@@ -38,6 +40,8 @@ bool VoertuigFactory::isValidType(const std::string& voertuigType) const
 
 Voertuig* VoertuigFactory::create(const std::string& voertuigType, const std::string& baanNaam, int positie)
 {
+    REQUIRE(positie >= 0, "positie moet >=0");
+
     if(voertuigType == "auto") {
         return new Auto(baanNaam, positie);
     }
@@ -55,5 +59,8 @@ Voertuig* VoertuigFactory::create(const std::string& voertuigType, const std::st
     }
 
     std::cerr << "Factory create: niet bestaand Voertuigtype: " << voertuigType << "\n";
+
+    ENSURE(!isValidType(voertuigType), "Voertuig met geldig type niet geconstrueerd!");
+
     return NULL;
 }

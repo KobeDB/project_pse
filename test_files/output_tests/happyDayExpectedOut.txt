@@ -1,60 +1,90 @@
 	Voertuig 0
 		-> baan: Baan1
 		-> type: auto
-		-> positie: 50
-		-> snelheid: 10
+		-> positie: 40
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 41
+		-> snelheid: 1.44
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 44
+		-> snelheid: 2.87992
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 48
+		-> snelheid: 4.31861
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 54
+		-> snelheid: 5.75202
+	Voertuig 1
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 0
+		-> snelheid: 0
 
 	Voertuig 0
 		-> baan: Baan1
 		-> type: auto
 		-> positie: 61
-		-> snelheid: 11.2504
+		-> snelheid: 7.17126
+	Voertuig 1
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 0
+		-> snelheid: 0
 
 	Voertuig 0
 		-> baan: Baan1
 		-> type: auto
-		-> positie: 73
-		-> snelheid: 12.3866
+		-> positie: 70
+		-> snelheid: 8.5611
+	Voertuig 1
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 1
+		-> snelheid: 1.14683
 
 	Voertuig 0
 		-> baan: Baan1
 		-> type: auto
-		-> positie: 86
-		-> snelheid: 13.3801
+		-> positie: 80
+		-> snelheid: 9.89923
+	Voertuig 1
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 3
+		-> snelheid: 2.31078
 
 	Voertuig 0
 		-> baan: Baan1
 		-> type: auto
-		-> positie: 100
-		-> snelheid: 14.2123
+		-> positie: 91
+		-> snelheid: 11.1571
+	Voertuig 1
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 6
+		-> snelheid: 3.48743
 
 	Voertuig 0
 		-> baan: Baan1
 		-> type: auto
-		-> positie: 114
-		-> snelheid: 14.8786
-
-	Voertuig 0
+		-> positie: 103
+		-> snelheid: 12.3033
+	Voertuig 1
 		-> baan: Baan1
-		-> type: auto
-		-> positie: 129
-		-> snelheid: 15.3892
-
-	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 144
-		-> snelheid: 15.7656
-
-	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 160
-		-> snelheid: 16.034
-
-	Voertuig 0
-		-> baan: Baan1
-		-> type: auto
-		-> positie: 176
-		-> snelheid: 16.2206
+		-> type: bus
+		-> positie: 11
+		-> snelheid: 4.67117
 

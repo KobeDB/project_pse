@@ -25,7 +25,7 @@ std::ostream& operator<<(std::ostream& os, const Baan& baan)
 {
     for(int i = baan.voertuigen.size()-1; i >= 0 ; i--) {
         os << "\tVoertuig " << (baan.voertuigen.size()-1-i) << "\n";
-        os << baan.voertuigen[i] << "\n";
+        os << *baan.voertuigen[i] << "\n";
     }
     return os;
 }
