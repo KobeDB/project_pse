@@ -6,9 +6,12 @@
 
 
 void Prioriteitsvoertuig::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger) {
+    float old_positie = (float)getPositie();
 
     updatePositieEnSnelheid(deltaTime_s);
 
     updateVersnelling(voorligger);
 
+    ENSURE(getSnelheid() >= 0, "Voertuig heeft negatieve snelheid!");
+    ENSURE(old_positie <= getPositie(), "Voertuig mag niet achteruit rijden!");
 }
