@@ -5,6 +5,7 @@
 #include "Baan.h"
 #include "Voertuig_generator.h"
 #include "voertuigen/Voertuig.h"
+#include "VoertuigFactory.h"
 
 Baan::Baan(const std::string& naam, int lengte) : naam(naam), lengte(lengte)
 {
@@ -86,7 +87,7 @@ const Voertuig* Baan::getVoorligger(int pos) const {
     return returnval;
 }
 
-const Voertuig* Baan::getFirstCar() const {
+const Voertuig* Baan::getAchtersteVoertuig() const {
     if(voertuigen.size() <= 0) return NULL;
     return voertuigen[0];
 }
@@ -149,6 +150,14 @@ void Baan::teken(std::ostream& os) const {
     }
 
     os << "\n";
+}
+
+Baan::Baan(const Baan &other) : naam(other.naam), lengte(other.lengte), verkeerslichten(other.verkeerslichten), voertuigen()
+{
+    for(std::vector<Voertuig*>::size_type i = 0; i < other.voertuigen.size(); i++) {
+        Voertuig* other_v = other.voertuigen[i];
+        voertuigen.push_back(VoertuigFactory::getInstance()->create(other_v->getType(), other_v->getBaanNaam(), other_v->getPositie()));
+    }
 }
 
 

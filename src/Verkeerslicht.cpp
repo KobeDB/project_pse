@@ -20,13 +20,22 @@ Verkeerslicht::Verkeerslicht(const std::string& baan, int positie, int cyclus): 
 
 void Verkeerslicht::update(float deltaTime_s)
 {
+    float old_timer = timer_s;
+    bool old_isRood = b_isRood;
     REQUIRE(deltaTime_s >= 0, "deltaTime_S mag niet negatief zijn");
 
     timer_s += deltaTime_s;
     if(timer_s >= (float)cyclus) {
-        timer_s = (int) (timer_s + deltaTime_s + 0.5f) % cyclus;
+        timer_s = (int) (timer_s + 0.5f) % cyclus;
         b_isRood = !b_isRood;
     }
 //    string kleur = b_isRood? "rood" : "groen";
 //    cout << "Licht: " << kleur << "\n"; // Tijdelijke debug print
+
+    ENSURE((old_timer + deltaTime_s < (float)cyclus)?
+                b_isRood == old_isRood
+                :
+                b_isRood == !old_isRood,
+                "Verkeerslicht is niet correct van kleur veranderd!");
+    ENSURE((old_timer + deltaTime_s < (float)cyclus)? timer_s == old_timer + deltaTime_s : timer_s == ((int) (old_timer + deltaTime_s + 0.5f)) % cyclus, "timer_s niet correct geupdatet" );
 }

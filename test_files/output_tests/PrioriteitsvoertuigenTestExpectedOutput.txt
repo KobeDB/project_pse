@@ -1,0 +1,95 @@
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 40
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 41
+		-> snelheid: 1.44
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 44
+		-> snelheid: 2.87992
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 48
+		-> snelheid: 4.31861
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 54
+		-> snelheid: 5.75202
+	Voertuig 1
+		-> baan: Baan1
+		-> type: politiecombi
+		-> positie: 0
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 61
+		-> snelheid: 7.17126
+	Voertuig 1
+		-> baan: Baan1
+		-> type: politiecombi
+		-> positie: 0
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 68
+		-> snelheid: 6.65209
+	Voertuig 1
+		-> baan: Baan1
+		-> type: politiecombi
+		-> positie: 1
+		-> snelheid: 1.53155
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 74
+		-> snelheid: 6.64157
+	Voertuig 1
+		-> baan: Baan1
+		-> type: politiecombi
+		-> positie: 4
+		-> snelheid: 3.06536
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 81
+		-> snelheid: 6.64021
+	Voertuig 1
+		-> baan: Baan1
+		-> type: politiecombi
+		-> positie: 9
+		-> snelheid: 4.59398
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: auto
+		-> positie: 88
+		-> snelheid: 6.64003
+	Voertuig 1
+		-> baan: Baan1
+		-> type: politiecombi
+		-> positie: 15
+		-> snelheid: 6.10588
+	Voertuig 2
+		-> baan: Baan1
+		-> type: politiecombi
+		-> positie: 0
+		-> snelheid: 0
+

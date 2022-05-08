@@ -34,12 +34,19 @@ protected:
 TEST_F(Voertuig_generatorTest, Voertuig_generatorTestHappyDay) {
     Baan b1("middelheimlaan", 300);
     Voertuig_generator generator(b1.getNaam(), "auto", 5);
+    b1.update(1);
     generator.update(1, &b1);
     ASSERT_TRUE(b1.getVoertuigenAmt() == 0);
+    b1.update(5);
     generator.update(5, &b1);
+
     ASSERT_TRUE(b1.getVoertuigenAmt() == 1);
+    b1.update(1);
     generator.update(1, &b1);
+
     ASSERT_TRUE(b1.getVoertuigenAmt() == 1);
+    b1.update(6);
     generator.update(6, &b1);
+
     ASSERT_TRUE(b1.getVoertuigenAmt() == 2);
 }

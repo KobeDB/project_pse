@@ -4,6 +4,7 @@
 
 #include "Voertuig.h"
 #include <cmath>
+#include <sstream>
 
 #include "../test_utils/DesignByContract.h"
 
@@ -23,6 +24,7 @@ Voertuig::Voertuig(const std::string &baanNaam, int positie): baanNaam(baanNaam)
 
 void Voertuig::update(float deltaTime_s, const Verkeerslicht* licht, const Voertuig* voorligger)
 {
+    float old_positie = positie;
     REQUIRE(properlyInitialized(), "class not properly initialized");
     REQUIRE(deltaTime_s >= 0, "deltaTime_s mag niet negatief zijn");
 
@@ -48,10 +50,24 @@ void Voertuig::update(float deltaTime_s, const Verkeerslicht* licht, const Voert
             }
         }
     }
+
+    ENSURE(snelheid >= 0, "Voertuig heeft negatieve snelheid!");
+    ENSURE(old_positie <= positie, "Voertuig mag niet achteruit rijden!");
+}
+
+std::string to_string(float a)
+{
+    std::stringstream ss;
+    ss << a;
+    return ss.str();
 }
 
 void Voertuig::updatePositieEnSnelheid(float deltaTime_s)
 {
+    Voertuig old_this = *this;
+    float old_positie = positie;
+    REQUIRE(deltaTime_s >= 0, "deltaTime_s mag niet negatief zijn");
+
     float nieuweSnelheid = snelheid + deltaTime_s * versnelling;
     if(nieuweSnelheid < 0 ) {
         positie = ((float)positie - pow(snelheid, 2) / (2 * versnelling));
@@ -61,10 +77,23 @@ void Voertuig::updatePositieEnSnelheid(float deltaTime_s)
         snelheid = nieuweSnelheid;
         positie += (snelheid * deltaTime_s);
     }
+
+    // Foutmarge ingebouwd om de overshoot te tolereren
+    ENSURE(snelheid <= get_V_MAX() + 2.0f, "snelheid over de limiet!");
+
+    ENSURE(snelheid >= 0, "Voertuig heeft negatieve snelheid!");
+    ENSURE(old_positie <= positie, "Voertuig mag niet achteruit rijden!");
+    // Kijk na of er voor de rest niets veranderd is
+    ENSURE(baanNaam == old_this.baanNaam, "");
+    ENSURE(versnelling == old_this.versnelling, "");
+    ENSURE(snelheid_max == old_this.snelheid_max, "");
 }
 
 void Voertuig::updateVersnelling(const Voertuig* voorligger)
 {
+    Voertuig old_this = *this;
+    REQUIRE(properlyInitialized(), "class not properly initialized");
+
     float delta = 0;
     if(voorligger) {
         int dPositie = voorligger->getPositie() - positie - get_VOERTUIG_LENGTE();
@@ -72,21 +101,62 @@ void Voertuig::updateVersnelling(const Voertuig* voorligger)
         delta = ((float)get_MINIMALE_VOLGAFSTAND() + std::max((float)0, snelheid + (snelheid * dSnelheid)/(2 * sqrt(get_VERSNELLING_MAX() * get_REMFACTOR_MAX())))) / (float)dPositie;
     }
     versnelling = get_VERSNELLING_MAX() * (1 - pow((snelheid / snelheid_max), 4) - pow(delta, 2));
+
+    ENSURE(versnelling <= get_VERSNELLING_MAX(), "versnelling over de limiet!");
+
+    // Kijk na of er voor de rest niets veranderd is
+    ENSURE(baanNaam == old_this.baanNaam, "");
+    ENSURE(positie == old_this.positie, "");
+    ENSURE(snelheid == old_this.snelheid, "");
+    ENSURE(snelheid_max == old_this.snelheid_max, "");
 }
 
 void Voertuig::stop()
 {
+    Voertuig old_this = *this;
+    REQUIRE(properlyInitialized(), "class not properly initialized");
+
     versnelling = -get_REMFACTOR_MAX() * snelheid / snelheid_max;
+
+    ENSURE(versnelling == -get_REMFACTOR_MAX() * old_this.snelheid / old_this.snelheid_max, "stop(): versnelling niet correct aangepast!");
+
+    // Kijk na of er voor de rest niets veranderd is
+    ENSURE(baanNaam == old_this.baanNaam, "");
+    ENSURE(positie == old_this.positie, "");
+    ENSURE(snelheid == old_this.snelheid, "");
+    ENSURE(snelheid_max == old_this.snelheid_max, "");
 }
 
 void Voertuig::vertraag()
 {
+    Voertuig old_this = *this;
+    REQUIRE(properlyInitialized(), "class not properly initialized");
+
     snelheid_max = get_VERTRAAGFACTOR() * get_V_MAX();
+
+    ENSURE(snelheid_max == get_VERTRAAGFACTOR() * get_V_MAX(), "vertraag(): snelheid_max niet correct aangepast!");
+
+    // Kijk na of er voor de rest niets veranderd is
+    ENSURE(baanNaam == old_this.baanNaam, "");
+    ENSURE(positie == old_this.positie, "");
+    ENSURE(snelheid == old_this.snelheid, "");
+    ENSURE(versnelling == old_this.versnelling, "");
 }
 
 void Voertuig::versnel()
 {
+    Voertuig old_this = *this;
+    REQUIRE(properlyInitialized(), "class not properly initialized");
+
     snelheid_max = get_V_MAX();
+
+    ENSURE(snelheid_max == get_V_MAX(), "versnel(): snelheid_max != get_V_max()");
+
+    // Kijk na of er voor de rest niets veranderd is
+    ENSURE(baanNaam == old_this.baanNaam, "");
+    ENSURE(positie == old_this.positie, "");
+    ENSURE(snelheid == old_this.snelheid, "");
+    ENSURE(versnelling == old_this.versnelling, "");
 }
 
 bool Voertuig::properlyInitialized() const {

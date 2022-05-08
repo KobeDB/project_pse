@@ -10,7 +10,7 @@
 
 class Voertuig_generator {
 private:
-    std::string baan;
+    std::string baanNaam;
     std::string type;
     int cyclus;
     float timer_s;
@@ -24,7 +24,7 @@ public:
 
     int getCyclus() const;
 
-    void update(float deltaTime_s, Baan* nugget);
+    void update(float deltaTime_s, Baan* baan);
 };
 
 

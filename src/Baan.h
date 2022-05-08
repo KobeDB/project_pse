@@ -23,6 +23,8 @@ public:
     Baan() : naam(), lengte() {}
     Baan(const std::string& naam, int lengte);
 
+    Baan(const Baan& other);
+
     // Baan destructor delete elk voertuig
     ~Baan();
 
@@ -40,7 +42,7 @@ public:
      * ENSURE(returnval == NULL || pos < returnval->getPositie(), "POST: returnval is geen voorligger")
      */
     const Voertuig* getVoorligger(int pos) const;
-    const Voertuig* getFirstCar() const;
+    const Voertuig* getAchtersteVoertuig() const;
 
     int getVoertuigenAmt() const { return voertuigen.size(); }
 

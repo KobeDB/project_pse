@@ -49,7 +49,7 @@ TEST_F(VerkeerssimulatieInputTest, HappyDay) {
     ofstream ofs("happyDayError.txt");
     ostringstream oss;
     VerkeerssituatieReader reader("reader_tests/input/happyDay.xml", oss);
-    ASSERT_TRUE(oss.str().size() == 0); // Asserteer dat er geen errors waren
+    ASSERT_TRUE(oss.str().empty()); // Asserteer dat er geen errors waren
 
     std::vector<BaanInfo> banen = reader.getBanen();
     ASSERT_TRUE(banen.size() == 1);
@@ -61,6 +61,18 @@ TEST_F(VerkeerssimulatieInputTest, HappyDay) {
     EXPECT_TRUE(lichten[0].baanNaam == banen[0].naam);
     EXPECT_TRUE(lichten[0].positie == 450);
     EXPECT_TRUE(lichten[0].cyclus == 10);
+
+    std::vector<VoertuigInfo> voertuigen = reader.getVoertuigen();
+    ASSERT_TRUE(voertuigen.size() == 1);
+    EXPECT_TRUE(voertuigen[0].type == "auto");
+    EXPECT_TRUE(voertuigen[0].positie == 0);
+    EXPECT_TRUE(voertuigen[0].baanNaam == "Middelheimlaan");
+
+    std::vector<VoertuiggeneratorInfo> generatoren = reader.getVoertuiggeneratoren();
+    ASSERT_TRUE(generatoren.size() == 1);
+    EXPECT_TRUE(generatoren[0].type == "bus");
+    EXPECT_TRUE(generatoren[0].frequentie == 5);
+    EXPECT_TRUE(generatoren[0].baanNaam == "Middelheimlaan");
 }
 
 TEST_F(VerkeerssimulatieInputTest, InputIllegalVerkeerssituaties) {

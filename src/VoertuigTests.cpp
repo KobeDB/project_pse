@@ -15,6 +15,14 @@
 #include <gtest/gtest.h>
 #include <vector>
 #include <sstream>
+#include <fstream>
+
+#include "voertuigen/Politiecombi.h"
+#include "voertuigen/Ziekenwagen.h"
+#include "voertuigen/Brandweerwagen.h"
+#include "voertuigen/Auto.h"
+#include "voertuigen/Bus.h"
+#include "VoertuigFactory.h"
 
 #define SSTR( x ) static_cast< std::ostringstream & >( \
         ( std::ostringstream() << std::dec << x ) ).str()
@@ -26,6 +34,8 @@
 #include "Baan.h"
 
 #include "test_utils/TicTacToeUtils.h"
+
+#include "OurTestingUtils.h"
 
 class VoertuigTest: public ::testing::Test {
 protected:
@@ -54,65 +64,76 @@ TEST_F(VoertuigTest, DefaultConstructor) {
 
 // Tests the "happy day" scenario
 TEST_F(VoertuigTest, HappyDay1VoertuigZonderLichten) {
-    Voertuig* voertuig = VoertuigFactory::getInstance()->create("auto", "Baan1", 10);
-    voertuig->update(1, NULL, NULL);
-    EXPECT_NEAR(voertuig->getPositie(), 20, 1);
-    EXPECT_NEAR(voertuig->getSnelheid(), 10, 1);
-    EXPECT_NEAR(voertuig->getVersnelling(), 1.25, 1);
+
+    using namespace std;
+    vector<BaanInfo> banen;
+    banen.push_back(BaanInfo("Baan1", 100));
+
+    vector<VerkeerslichtInfo> lichten;
+
+    vector<VoertuigInfo> voertuigen;
+    voertuigen.push_back(VoertuigInfo("Baan1", "auto", 10));
+
+    vector<VoertuiggeneratorInfo> generatoren;
+
+    Verkeerssimulatie sim(banen,lichten,voertuigen,generatoren);
+    OurTestingUtils::testSimulatie(sim, 10, 1, "output_tests/HappyDay1VoertuigZonderLichtenTestOutput.txt", "output_tests/HappyDay1VoertuigZonderLichtenTestExpectedOutput.txt");
 }
 
 // Tests the "happy day" scenario
 TEST_F(VoertuigTest, HappyDay1VoertuigMetLicht) {
-    Verkeerslicht licht("Baan1", 140, 7);
 
-    Voertuig voertuig("Baan1", 10);
-    voertuig.update(1, &licht, NULL);
-    EXPECT_NEAR(voertuig.getPositie(), 20, 1);
-    EXPECT_NEAR(voertuig.getSnelheid(), 10, 1);
-    EXPECT_NEAR(voertuig.getVersnelling(), 1.25, 1);
+    using namespace std;
+    vector<BaanInfo> banen;
+    banen.push_back(BaanInfo("Baan1", 200));
 
-    for(int i = 0; i < 11; i++) {
-        licht.update(1);
-        voertuig.update(1, &licht, NULL);
-//        std::cout << licht.isRood();
-//        std::cout << voertuig << "\n";
-    }
-    EXPECT_NEAR(voertuig.getSnelheid(), 0, 2);
+    vector<VerkeerslichtInfo> lichten;
+    lichten.push_back(VerkeerslichtInfo("Baan1", 140, 7));
+
+    vector<VoertuigInfo> voertuigen;
+    voertuigen.push_back(VoertuigInfo("Baan1", "auto", 10));
+
+    vector<VoertuiggeneratorInfo> generatoren;
+
+    Verkeerssimulatie sim(banen,lichten,voertuigen,generatoren);
+    OurTestingUtils::testSimulatie(sim, 10, 1, "output_tests/HappyDay1VoertuigMetLichtTestOutput.txt", "output_tests/HappyDay1VoertuigMetLichtTestExpectedOutput.txt");
 }
 
 TEST_F(VoertuigTest, HappyDayVoertuigenMetLicht) {
-    Verkeerslicht licht("Baan1", 140, 6);
+    using namespace std;
+    vector<BaanInfo> banen;
+    banen.push_back(BaanInfo("Baan1", 200));
 
-    Voertuig voertuig1("Baan1", 30);
-    Voertuig voertuig2("Baan1", 0);
-    voertuig1.update(1, &licht, NULL);
-    voertuig2.update(1, &licht, &voertuig1);
-    EXPECT_NEAR(voertuig1.getPositie(), 40, 1);
-    EXPECT_NEAR(voertuig1.getSnelheid(), 10, 1);
-    EXPECT_NEAR(voertuig1.getVersnelling(), 1, 1);
-    EXPECT_NEAR(voertuig2.getPositie(), 10, 1);
-    EXPECT_NEAR(voertuig2.getSnelheid(), 10, 1);
-    EXPECT_NEAR(voertuig2.getVersnelling(), 1, 1);
+    vector<VerkeerslichtInfo> lichten;
+    lichten.push_back(VerkeerslichtInfo("Baan1", 140, 6));
 
-    for(int i = 0; i < 10; i++) {
-        licht.update(1);
-        voertuig1.update(1, &licht, NULL);
-        voertuig2.update(1, &licht, &voertuig1);
-//        std::cout << "Tijdstip: " << i << "\n";
-//        std::cout << "" << licht.isRood();
-//        std::cout << "\t" << voertuig1 << "\n";
-    }
-    //Licht rood
-    EXPECT_NEAR(voertuig2.getSnelheid(), 0, 2);
-    EXPECT_NEAR(voertuig1.getSnelheid(), 0, 2);
+    vector<VoertuigInfo> voertuigen;
+    voertuigen.push_back(VoertuigInfo("Baan1", "auto", 40));
+    voertuigen.push_back(VoertuigInfo("Baan1", "bus", 70));
 
-    for(int i = 0; i < 3; i++) {
-        licht.update(1);
-        voertuig1.update(1, &licht, NULL);
-        voertuig2.update(1, &licht, &voertuig1);
-    }
-    //Licht terug groen
-    EXPECT_GT(voertuig1.getSnelheid(), 3);
-    EXPECT_GT(voertuig2.getSnelheid(), 3);
+    vector<VoertuiggeneratorInfo> generatoren;
 
+    Verkeerssimulatie sim(banen,lichten,voertuigen,generatoren);
+    OurTestingUtils::testSimulatie(sim, 10, 1, "output_tests/HappyDayVoertuigenMetLichtTestOutput.txt", "output_tests/HappyDayVoertuigenMetLichtTestExpectedOutput.txt");
+}
+
+TEST_F(VoertuigTest, PrioriteitsvoertuigenTest) {
+    using namespace std;
+
+    vector<BaanInfo> banen;
+    banen.push_back(BaanInfo("Baan1", 200));
+
+    vector<VerkeerslichtInfo> lichten;
+    lichten.push_back(VerkeerslichtInfo("Baan1", 100, 5));
+
+    vector<VoertuigInfo> voertuigen;
+    voertuigen.push_back(VoertuigInfo("Baan1", "auto", 40));
+
+    vector<VoertuiggeneratorInfo> generatoren;
+    generatoren.push_back(VoertuiggeneratorInfo("Baan1", "politiecombi", 5));
+    generatoren.push_back(VoertuiggeneratorInfo("Baan1", "ziekenwagen", 30));
+
+    Verkeerssimulatie verkeerssimulatie(banen, lichten, voertuigen, generatoren);
+
+    OurTestingUtils::testSimulatie(verkeerssimulatie, 10, 1, "output_tests/PrioriteitsvoertuigenTestOutput.txt", "output_tests/PrioriteitsvoertuigenTestExpectedOutput.txt");
 }
