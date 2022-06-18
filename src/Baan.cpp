@@ -71,6 +71,29 @@ void Baan::addVoertuig(Voertuig* voertuig)
     voertuigen.push_back(voertuig);
 }
 
+void Baan::addBushalte(Bushalte bushalte)
+{
+    // De verkeerslichten zijn gesorteerd op positie, van klein naar groot
+    for(unsigned i = 0; i < bushaltes.size(); i++) {
+        if(bushaltes[i].getPositie() > bushalte.getPositie()) {
+            std::vector<Bushalte>::iterator it = bushaltes.begin() + i;
+            bushaltes.insert(it, bushalte);
+            return;
+        }
+    }
+    bushaltes.push_back(bushalte);
+}
+
+Bushalte* Baan::getVolgendeBushalte(int pos)
+{
+    for(unsigned i = 0; i < bushaltes.size(); i++) {
+        Bushalte& bushalte = bushaltes[i];
+        if(pos < bushalte.getPositie()) // We nemen meteen dit licht omdat onze verkeerslichten volgens afstand gesorteerd zijn
+            return &bushalte;
+    }
+    return NULL;
+}
+
 const Voertuig* Baan::getVoorligger(int pos) const {
     REQUIRE(pos >= 0, "pos mag niet negatief zijn");
 
@@ -102,7 +125,7 @@ void Baan::update(float deltaTime_s)
     // We lopen de lijst van achter naar voren af, omdat we de lijst ondertussen bewerken
     for(int i = voertuigen.size()-1; i >= 0; i--) {
         Voertuig* tuig = voertuigen[i];
-        tuig->update(deltaTime_s, getVolgendeLicht(tuig->getPositie()), getVoorligger(tuig->getPositie()));
+        tuig->update(deltaTime_s, getVolgendeLicht(tuig->getPositie()), getVoorligger(tuig->getPositie()), getVolgendeBushalte(tuig->getPositie()));
         if(tuig->getPositie() > getLengte()) {
             voertuigen.erase(voertuigen.begin() + i);
         }
@@ -116,7 +139,8 @@ bool Baan::done() const {
 void Baan::teken(std::ostream& os) const {
     std::string baanNaamStr = getNaam();
     std::string verkeerslichtenStr = " >verkeerslichten";
-    int width = std::max(baanNaamStr.size(), verkeerslichtenStr.size());
+    std::string bushalteStr = " >bushaltes";
+    int width = std::max(std::max(baanNaamStr.size(), verkeerslichtenStr.size()), bushalteStr.size());
 
     os << baanNaamStr;
     for(int i = baanNaamStr.size(); i < width; i++) { os << " "; }
@@ -150,6 +174,20 @@ void Baan::teken(std::ostream& os) const {
     }
 
     os << "\n";
+
+    os << bushalteStr;
+    for(int i = bushalteStr.size(); i < width; i++) { os << " "; }
+    os << "| ";
+    baanPos = 0;
+    for(std::vector<Bushalte>::size_type i = 0; i < bushaltes.size(); i++) {
+        const Bushalte& bushalte = bushaltes[i];
+        for(; baanPos < bushalte.getPositie(); baanPos++) {
+            os << " ";
+        }
+        os << (bushalte.toegekendeBus? "H" : "h"); // 'H' -> halte geclaimd door bus, 'h' halte ongeclaimd
+    }
+
+    os << "\n";
 }
 
 Baan::Baan(const Baan &other) : naam(other.naam), lengte(other.lengte), verkeerslichten(other.verkeerslichten), voertuigen()
@@ -159,5 +197,6 @@ Baan::Baan(const Baan &other) : naam(other.naam), lengte(other.lengte), verkeers
         voertuigen.push_back(VoertuigFactory::getInstance()->create(other_v->getType(), other_v->getBaanNaam(), other_v->getPositie()));
     }
 }
+
 
 

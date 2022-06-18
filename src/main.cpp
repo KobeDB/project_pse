@@ -18,7 +18,7 @@ int main() {
 
     VerkeerssituatieReader reader("verkeerssituaties/gewone_verkeerssituatie.xml", cerr);
 
-    Verkeerssimulatie simulatie(reader.getBanen(), reader.getVerkeerslichten(), reader.getVoertuigen(), reader.getVoertuiggeneratoren());
+    Verkeerssimulatie simulatie(reader.getBanen(), reader.getVerkeerslichten(), reader.getVoertuigen(), reader.getVoertuiggeneratoren(), reader.getBushaltes());
     std::cout << "SIMULATIE: \n";
     std::cout << simulatie << "\n";
     std::ofstream grafischeImpressie("grafische_impressie.txt");

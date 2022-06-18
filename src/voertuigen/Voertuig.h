@@ -29,8 +29,10 @@ public:
     bool properlyInitialized() const;
 private:
     std::string baanNaam;
+protected:
     float positie;
     float snelheid;
+private:
     float versnelling;
     float snelheid_max; // Dit is niet constant omdat dit wordt herberekend bij het vertragen
 public:
@@ -98,7 +100,7 @@ public:
      *  REQUIRE(properlyInitialized(), "class not properly initialized");
      *  REQUIRE(deltaTime_s >= 0, "deltaTime_s mag niet negatief zijn");
      */
-    virtual void update(float deltaTime_s, const Verkeerslicht* licht, const Voertuig* voorligger);
+    virtual void update(float deltaTime_s, const Verkeerslicht* licht, const Voertuig* voorligger, Bushalte* bushalte);
 
     void updatePositieEnSnelheid(float deltaTime_s);
 

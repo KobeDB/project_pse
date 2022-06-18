@@ -4,7 +4,55 @@
 
 #include "Bus.h"
 
-void Bus::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger) {
-    //TODO: Bus heeft ander gedrag dan auto. Hoe komt dit??
-    Voertuig::update(deltaTime_s, licht, voorligger);
+#include <cmath>
+
+void Bus::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger, Bushalte* bushalte) {
+
+    if(resterendeWachttijd > 0) {
+        resterendeWachttijd -= deltaTime_s;
+        if(resterendeWachttijd <= 0) {
+            if(!bushalte) std::cerr << "Wachtende bus heeft geen bushalte! Los uw bugs op, idioot!!";
+            bushalte->toegekendeBus = NULL;
+            this->positie += 5.0f; // beweeg genoeg voorbij de bushalte om te vermijden dat we deze bus terug aan dezelfde bushalte toekennen
+        }
+        return;
+    }
+
+    if(!bushalte) {
+        // Geen bushalte --> gewoon volgen
+        Voertuig::update(deltaTime_s, licht, voorligger, bushalte);
+        return;
+    }
+
+    // Deze bus nadert wel een bushalte
+
+    if(bushalte->toegekendeBus != this && bushalte->toegekendeBus != NULL) {
+        // De bus is niet de eerste bus voor de halte --> gewoon volgen
+        Voertuig::update(deltaTime_s, licht, voorligger, bushalte);
+        return;
+    }
+
+    // De bus is wel de eerste bus voor de halte --> desnoods vertragen of stoppen
+    bushalte->toegekendeBus = this;
+    if(abs(bushalte->getPositie()-this->getPositie()) < get_VERTRAAGAFSTAND()) {
+        updatePositieEnSnelheid(deltaTime_s);
+        updateVersnelling(NULL); // negeer de voorligger --> NULL meegeven
+        if(abs(bushalte->getPositie()-this->getPositie()) < get_STOPAFSTAND()) {
+            // laat voertuig stoppen
+            stop();
+            if(getSnelheid() < 0.3f) {
+                snelheid = 0.0f;
+                resterendeWachttijd = bushalte->getWachttijd();
+            }
+        }
+        else {
+            // pas de vertraagfactor toe
+            vertraag();
+        }
+    }
+    else {
+        // De bus hoeft niet te vertragen of te stoppen --> gewoon volgen
+        Voertuig::update(deltaTime_s, licht, voorligger, bushalte);
+        return;
+    }
 }

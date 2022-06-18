@@ -30,7 +30,8 @@ std::ostream &operator<<(std::ostream &os, const Verkeerssimulatie &sim)
 Verkeerssimulatie::Verkeerssimulatie(const std::vector<BaanInfo>& pBanen,
                                      const std::vector<VerkeerslichtInfo>& pLichten,
                                      const std::vector<VoertuigInfo>& pVoertuigen,
-                                     const std::vector<VoertuiggeneratorInfo>& pGeneratoren)
+                                     const std::vector<VoertuiggeneratorInfo>& pGeneratoren,
+                                     const std::vector<BushalteInfo>& pBushaltes)
                                      : banen()
                                      {
     for(unsigned b = 0; b < pBanen.size(); b++) {
@@ -57,6 +58,10 @@ Verkeerssimulatie::Verkeerssimulatie(const std::vector<BaanInfo>& pBanen,
 
         for(std::vector<VoertuiggeneratorInfo>::size_type i = 0; i < pGeneratoren.size(); i++) {
             generatoren.push_back(Voertuig_generator(pGeneratoren[i].baanNaam, pGeneratoren[i].type, pGeneratoren[i].frequentie));
+        }
+
+        for(std::vector<BushalteInfo>::size_type i = 0; i < pBushaltes.size(); i++) {
+            banen[pBushaltes[i].baanNaam].addBushalte(Bushalte(pBushaltes[i].positie, pBushaltes[i].wachttijd));
         }
     }
 }

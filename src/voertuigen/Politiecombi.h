@@ -22,7 +22,7 @@ public:
 
     Politiecombi(const std::string& baanNaam, int positie) : Prioriteitsvoertuig(baanNaam, positie) {}
 
-    void update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger);
+    void update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger, Bushalte* bushalte);
 
     std::string getType() const {return "politiecombi";} // overridden van de Base class
 };

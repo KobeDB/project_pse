@@ -4,6 +4,6 @@
 
 #include "Auto.h"
 
-void Auto::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger) {
-    Voertuig::update(deltaTime_s, licht, voorligger);
+void Auto::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger, Bushalte* bushalte) {
+    Voertuig::update(deltaTime_s, licht, voorligger, bushalte);
 }

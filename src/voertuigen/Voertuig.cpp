@@ -22,7 +22,7 @@ Voertuig::Voertuig(const std::string &baanNaam, int positie): baanNaam(baanNaam)
     ENSURE(this->properlyInitialized(), "constructor must end in properly initialized state");
 }
 
-void Voertuig::update(float deltaTime_s, const Verkeerslicht* licht, const Voertuig* voorligger)
+void Voertuig::update(float deltaTime_s, const Verkeerslicht* licht, const Voertuig* voorligger, Bushalte* bushalte)
 {
     float old_positie = positie;
     REQUIRE(properlyInitialized(), "class not properly initialized");
@@ -79,7 +79,7 @@ void Voertuig::updatePositieEnSnelheid(float deltaTime_s)
     }
 
     // Foutmarge ingebouwd om de overshoot te tolereren
-    ENSURE(snelheid <= get_V_MAX() + 2.0f, "snelheid over de limiet!");
+    ENSURE(snelheid <= get_V_MAX() + 5.0f, "snelheid over de limiet!");
 
     ENSURE(snelheid >= 0, "Voertuig heeft negatieve snelheid!");
     ENSURE(old_positie <= positie, "Voertuig mag niet achteruit rijden!");

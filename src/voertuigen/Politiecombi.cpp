@@ -4,6 +4,6 @@
 
 #include "Politiecombi.h"
 
-void Politiecombi::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger) {
-    Prioriteitsvoertuig::update(deltaTime_s, licht, voorligger);
+void Politiecombi::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger, Bushalte* bushalte) {
+    Prioriteitsvoertuig::update(deltaTime_s, licht, voorligger, bushalte);
 }

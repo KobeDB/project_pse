@@ -4,7 +4,7 @@
 
 #include "Brandweerwagen.h"
 
-void Brandweerwagen::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger)
+void Brandweerwagen::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger, Bushalte* bushalte)
 {
-    Prioriteitsvoertuig::update(deltaTime_s, licht, voorligger);
+    Prioriteitsvoertuig::update(deltaTime_s, licht, voorligger, bushalte);
 }

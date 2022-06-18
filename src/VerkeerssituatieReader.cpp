@@ -102,6 +102,9 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
                 errstr << "Verkeerslicht " << i << " too close to Verkeerslicht " << i-1 << "\n";
             }
         }
+
+        if(verkeerslichten[i].positie < 0) errstr << "Verkeerslicht not on road\n";
+        if(verkeerslichten[i].cyclus <= 0) errstr << "Verkeerslicht cannot have cyclus <= 0\n";
     }
 
     for(int i = 0; i < (int) Generatoren.size(); i++){
@@ -124,6 +127,26 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
             errstr << "Voertuiggenerator: baan van generator bestaat niet\n";
         }
     }
+
+    // Bushaltes consistency checks
+    for(vector<BushalteInfo>::size_type i = 0; i < bushaltes.size(); i++) {
+        bool bushalteOpBestaandeBaan = false;
+        const BaanInfo* baanVanBushalte = NULL;
+        for(vector<BaanInfo>::size_type j = 0; j < banen.size(); j++) {
+            if(banen[j].naam == bushaltes[i].baanNaam) {
+                bushalteOpBestaandeBaan = true;
+                baanVanBushalte = &banen[j];
+                break;
+            }
+        }
+        if(!bushalteOpBestaandeBaan) { errstr << "Bushalte not on existing road\n"; return; } // RETURNEN, anders dikke pech met een nullpointer dereference
+
+        if(bushaltes[i].positie < 0 || bushaltes[i].positie > baanVanBushalte->lengte) errstr << "Bushalte not on road\n";
+
+        if(bushaltes[i].wachttijd <= 0) errstr << "Bushalte cannot have wachttijd <= 0\n";
+    }
+
+
 }
 
 void VerkeerssituatieReader::read(const std::string& situatieFile, std::ostream &errstr)
@@ -294,7 +317,50 @@ void VerkeerssituatieReader::read(const std::string& situatieFile, std::ostream 
             Generatoren.push_back(voertuiggenerator);
             continue;
         }
+
+        if(verkeersElementNaam == "BUSHALTE") {
+            TiXmlElement* baanNaamNode = NULL;
+            TiXmlElement* positieNode = NULL;
+            TiXmlElement* wachttijdNode = NULL;
+            // Deze nodes zijn niet per se in een vaste volgorde, we moeten dus met een for loop de componenten aflopen
+            for(TiXmlElement* bushalteComponent = verkeersElement->FirstChildElement(); bushalteComponent != NULL;
+                bushalteComponent = bushalteComponent->NextSiblingElement())
+            {
+                if(std::string(bushalteComponent->Value()) == "baan") // cast de Value naar string, anders werkt dit niet
+                    baanNaamNode = bushalteComponent;
+                if(std::string(bushalteComponent->Value()) == "positie")
+                    positieNode = bushalteComponent;
+                if(std::string(bushalteComponent->Value()) == "wachttijd")
+                    wachttijdNode  = bushalteComponent;
+            }
+            if(!baanNaamNode || !positieNode || !wachttijdNode ) {
+                errstr << "ERROR: Ontbrekende child node in BUSHALTE\n";
+                continue;
+            }
+
+            std::string baanNaam = baanNaamNode->GetText();
+
+            bool success;
+            int positie = tryParseInt(positieNode->GetText(),success);
+            if(!success) {
+                errstr << "ERROR: BUSHALTE:POSITIE is geen getal\n";
+                continue;
+            }
+
+            int wachttijd = tryParseInt(wachttijdNode->GetText(), success);
+            if(!success) {
+                errstr << "ERROR: BUSHALTE:WACHTTIJD is geen getal\n";
+                continue;
+            }
+
+            bushaltes.push_back(BushalteInfo(baanNaam, positie, wachttijd));
+
+            continue;
+        }
+
         errstr << "Onherkenbaar element: " << verkeersElementNaam << "\n";
     }
+
+
 
 }

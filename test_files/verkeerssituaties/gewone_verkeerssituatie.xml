@@ -2,11 +2,11 @@
 <VERKEERSSITUATIE>
     <BAAN>
         <naam>Middelheimlaan</naam>
-        <lengte>200</lengte>
+        <lengte>250</lengte>
     </BAAN>
     <VERKEERSLICHT>
         <baan>Middelheimlaan</baan>
-        <positie>100</positie>
+        <positie>150</positie>
         <cyclus>8</cyclus>
     </VERKEERSLICHT>
     <VOERTUIG>
@@ -24,4 +24,11 @@
         <type>bus</type>
         <frequentie>5</frequentie>
     </VOERTUIGGENERATOR>
+
+    <BUSHALTE>
+        <baan>Middelheimlaan</baan>
+        <positie> 80 </positie>
+        <wachttijd> 20 </wachttijd>
+    </BUSHALTE>
+
 </VERKEERSSITUATIE>

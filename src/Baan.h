@@ -11,6 +11,8 @@
 
 #include "Verkeerslicht.h"
 
+#include "Bushalte.h"
+
 class Voertuig;
 
 class Baan {
@@ -19,6 +21,7 @@ private:
     int lengte;
     std::vector<Verkeerslicht> verkeerslichten;
     std::vector<Voertuig*> voertuigen;
+    std::vector<Bushalte> bushaltes;
 public:
     Baan() : naam(), lengte() {}
     Baan(const std::string& naam, int lengte);
@@ -37,6 +40,8 @@ public:
 
     const Verkeerslicht* getVolgendeLicht(int pos) const;
 
+    Bushalte* getVolgendeBushalte(int pos);
+
     /*
      * POST: returnt het voertuig dat net voor pos rijdt. als er geen voorligger is, returnt NULL
      * ENSURE(returnval == NULL || pos < returnval->getPositie(), "POST: returnval is geen voorligger")
@@ -48,6 +53,7 @@ public:
 
     void addVerkeerslicht(const Verkeerslicht& licht);
     void addVoertuig(Voertuig* voertuig);
+    void addBushalte(Bushalte bushalte);
 
     /// functie om een Baan mooi af te printen
     friend std::ostream& operator<<(std::ostream& os, const Baan& baan);

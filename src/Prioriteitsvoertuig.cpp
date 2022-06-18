@@ -5,7 +5,7 @@
 #include "Prioriteitsvoertuig.h"
 
 
-void Prioriteitsvoertuig::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger) {
+void Prioriteitsvoertuig::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger, Bushalte* bushalte) {
     float old_positie = (float)getPositie();
 
     updatePositieEnSnelheid(deltaTime_s);

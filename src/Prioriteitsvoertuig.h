@@ -10,7 +10,7 @@
 class Prioriteitsvoertuig : public Voertuig {
 public:
     Prioriteitsvoertuig(const std::string &baanNaam, int positie) : Voertuig(baanNaam, positie) {}
-    virtual void update(float deltaTime_s, const Verkeerslicht* licht, const Voertuig* voorligger);
+    virtual void update(float deltaTime_s, const Verkeerslicht* licht, const Voertuig* voorligger, Bushalte* bushalte);
 
     virtual ~Prioriteitsvoertuig() {}
 };
