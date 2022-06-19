@@ -8,13 +8,14 @@
 #include "VoertuigFactory.h"
 #include <sstream>
 #include <algorithm>
+#include <set>
 
 int tryParseInt(const std::string& s, bool& success)
 {
     std::stringstream iss(s);
     int val;
     iss >> val;
-    if(!iss) {
+    if(!iss || !(iss >> std::ws).eof()) {
         success = false;
         return 0;
     }
@@ -38,7 +39,7 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
         • Elke voertuiggenerator staat op een bestaande baan. NOG NIET
         • De positie van elk voertuig is kleiner dan de lengte van de baan. (done)
         • De positie van elk verkeerslicht is kleiner dan de lengte van de baan. (done)
-        • Er is maximaal  ́een voertuiggenerator op elke baan. NOG NIET
+        • Er is maximaal  ́een voertuiggenerator op elke baan. (done)
         • Een verkeerslicht mag zich niet in de vertraagafstand van een ander
         verkeerslicht bevinden (zie Appendix B). (done)
         Opmerkingen:
@@ -54,6 +55,16 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
         pair<string, BaanInfo> baanInsert (banen[j].naam, banen[j]);
         baanAcc.insert(baanInsert);
     }
+
+    //De naam wordt gebruikt als unieke identificatie van een baan.
+    set<string> gezieneBanen;
+    for(int j = 0; j < (int) banen.size(); j++){
+        if(gezieneBanen.find(banen[j].naam) != gezieneBanen.end()) {
+            errstr << "ERROR: 2 banen met eenzelfde naam!\n";
+        }
+        gezieneBanen.insert(banen[j].naam);
+    }
+
     //Elk voertuig staat op een bestaande baan.
     //De positie van elk voertuig is kleiner dan de lengte van de baan.
     for(unsigned i = 0; i < voertuigen.size(); i++){
@@ -107,8 +118,14 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
         if(verkeerslichten[i].cyclus <= 0) errstr << "Verkeerslicht cannot have cyclus <= 0\n";
     }
 
+    set<string> banenMetGeneratoren;
     for(int i = 0; i < (int) Generatoren.size(); i++){
         const VoertuiggeneratorInfo& generatorInfo = Generatoren[i];
+
+        if(banenMetGeneratoren.find(generatorInfo.baanNaam) != banenMetGeneratoren.end()) {
+            errstr << "Er mag niet meer dan 1 voertuiggenerator zijn op eenzelfde baan!\n";
+        }
+        banenMetGeneratoren.insert(generatorInfo.baanNaam);
 
         if(generatorInfo.frequentie <= 0) {
             errstr << "Voertuiggenerator: frequentie mag niet 0 of negatief zijn\n";
@@ -145,8 +162,6 @@ void VerkeerssituatieReader::checkConsistency(std::ostream &errstr)
 
         if(bushaltes[i].wachttijd <= 0) errstr << "Bushalte cannot have wachttijd <= 0\n";
     }
-
-
 }
 
 void VerkeerssituatieReader::read(const std::string& situatieFile, std::ostream &errstr)

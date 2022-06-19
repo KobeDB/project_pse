@@ -52,7 +52,9 @@ TEST_F(VerkeerssimulatieOutputTest, OutputHappyDay) {
     vector<VoertuiggeneratorInfo> generatoren;
     generatoren.push_back(VoertuiggeneratorInfo(baan1.naam, "bus", 5));
 
-    Verkeerssimulatie verkeerssimulatie(banen, lichten, voertuigen, generatoren);
+    vector<BushalteInfo> bushaltes;
+
+    Verkeerssimulatie verkeerssimulatie(banen, lichten, voertuigen, generatoren, bushaltes);
 
     ofstream testOutput("output_tests/happyDayTestOutput.txt");
     if(!testOutput) cerr << "happyDayOutputTest: kan output file niet openen\n";
@@ -82,7 +84,10 @@ TEST_F(VerkeerssimulatieOutputTest, tekenTest) {
     vector<VoertuiggeneratorInfo> generatoren;
     generatoren.push_back(VoertuiggeneratorInfo(baan1.naam, "bus", 5));
 
-    Verkeerssimulatie verkeerssimulatie(banen, lichten, voertuigen, generatoren);
+    vector<BushalteInfo> bushaltes;
+    bushaltes.push_back(BushalteInfo(baan1.naam, 60, 10));
+
+    Verkeerssimulatie verkeerssimulatie(banen, lichten, voertuigen, generatoren, bushaltes);
 
     ofstream testOutput("output_tests/happyDayTekenTestOutput.txt");
     if(!testOutput) cerr << "happyDayTekenOutputTest: kan output file niet openen\n";

@@ -1,0 +1,240 @@
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 10
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 11
+		-> snelheid: 1.22
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 13
+		-> snelheid: 2.43996
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 17
+		-> snelheid: 3.6594
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 21
+		-> snelheid: 4.37341
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 26
+		-> snelheid: 4.56117
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 30
+		-> snelheid: 4.55992
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 35
+		-> snelheid: 4.56001
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 39
+		-> snelheid: 4.56
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 44
+		-> snelheid: 4.56
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 4.56
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 49
+		-> snelheid: 0
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 50
+		-> snelheid: 1.22
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 52
+		-> snelheid: 2.43375
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 56
+		-> snelheid: 3.55476
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 60
+		-> snelheid: 4.32421
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 65
+		-> snelheid: 4.55764
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 69
+		-> snelheid: 4.56016
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 74
+		-> snelheid: 4.55999
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 79
+		-> snelheid: 4.56
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 83
+		-> snelheid: 4.56
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 88
+		-> snelheid: 4.56
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 92
+		-> snelheid: 4.56
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 97
+		-> snelheid: 4.56
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 97
+		-> snelheid: 0.27
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 97
+		-> snelheid: 0.0159868
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 97
+		-> snelheid: 0.000946588
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 97
+		-> snelheid: 5.60479e-05
+
+	Voertuig 0
+		-> baan: Baan1
+		-> type: bus
+		-> positie: 97
+		-> snelheid: 3.31863e-06
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<VERKEERSSITUATIE>
+    <BAAN>
+        <naam>Middelheimlaan</naam>
+        <lengte>600</lengte>
+    </BAAN>
+    <VOERTUIGGENERATOR>
+        <baan>Middelheimlaan</baan>
+        <type>bus</type>
+        <frequentie>5</frequentie>
+    </VOERTUIGGENERATOR>
+    <VOERTUIGGENERATOR>
+        <baan>Middelheimlaan</baan>
+        <type>politiecombi</type>
+        <frequentie>7</frequentie>
+    </VOERTUIGGENERATOR>
+</VERKEERSSITUATIE>

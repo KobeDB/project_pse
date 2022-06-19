@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<VERKEERSSITUATIE>
+    <BAAN>
+        <naam>Middelheimlaan</naam>
+        <lengte>600</lengte>
+    </BAAN>
+    <BUSHALTE>
+        <baan>Middelheimlaan</baan>
+        <positie>1000</positie>
+        <wachttijd>10</wachttijd>
+    </BUSHALTE>
+</VERKEERSSITUATIE>

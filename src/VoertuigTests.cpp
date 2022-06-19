@@ -76,7 +76,9 @@ TEST_F(VoertuigTest, HappyDay1VoertuigZonderLichten) {
 
     vector<VoertuiggeneratorInfo> generatoren;
 
-    Verkeerssimulatie sim(banen,lichten,voertuigen,generatoren);
+    vector<BushalteInfo> bushaltes;
+
+    Verkeerssimulatie sim(banen,lichten,voertuigen,generatoren, bushaltes);
     OurTestingUtils::testSimulatie(sim, 10, 1, "output_tests/HappyDay1VoertuigZonderLichtenTestOutput.txt", "output_tests/HappyDay1VoertuigZonderLichtenTestExpectedOutput.txt");
 }
 
@@ -95,7 +97,9 @@ TEST_F(VoertuigTest, HappyDay1VoertuigMetLicht) {
 
     vector<VoertuiggeneratorInfo> generatoren;
 
-    Verkeerssimulatie sim(banen,lichten,voertuigen,generatoren);
+    vector<BushalteInfo> bushaltes;
+
+    Verkeerssimulatie sim(banen,lichten,voertuigen,generatoren, bushaltes);
     OurTestingUtils::testSimulatie(sim, 10, 1, "output_tests/HappyDay1VoertuigMetLichtTestOutput.txt", "output_tests/HappyDay1VoertuigMetLichtTestExpectedOutput.txt");
 }
 
@@ -113,7 +117,9 @@ TEST_F(VoertuigTest, HappyDayVoertuigenMetLicht) {
 
     vector<VoertuiggeneratorInfo> generatoren;
 
-    Verkeerssimulatie sim(banen,lichten,voertuigen,generatoren);
+    vector<BushalteInfo> bushaltes;
+
+    Verkeerssimulatie sim(banen,lichten,voertuigen,generatoren, bushaltes);
     OurTestingUtils::testSimulatie(sim, 10, 1, "output_tests/HappyDayVoertuigenMetLichtTestOutput.txt", "output_tests/HappyDayVoertuigenMetLichtTestExpectedOutput.txt");
 }
 
@@ -133,7 +139,33 @@ TEST_F(VoertuigTest, PrioriteitsvoertuigenTest) {
     generatoren.push_back(VoertuiggeneratorInfo("Baan1", "politiecombi", 5));
     generatoren.push_back(VoertuiggeneratorInfo("Baan1", "ziekenwagen", 30));
 
-    Verkeerssimulatie verkeerssimulatie(banen, lichten, voertuigen, generatoren);
+    vector<BushalteInfo> bushaltes;
+
+
+    Verkeerssimulatie verkeerssimulatie(banen, lichten, voertuigen, generatoren, bushaltes);
 
     OurTestingUtils::testSimulatie(verkeerssimulatie, 10, 1, "output_tests/PrioriteitsvoertuigenTestOutput.txt", "output_tests/PrioriteitsvoertuigenTestExpectedOutput.txt");
+}
+
+TEST_F(VoertuigTest, BushalteTest)
+{
+    using namespace std;
+
+    vector<BaanInfo> banen;
+    banen.push_back(BaanInfo("Baan1", 200));
+
+    vector<VerkeerslichtInfo> lichten;
+    lichten.push_back(VerkeerslichtInfo("Baan1", 100, 5));
+
+    vector<VoertuigInfo> voertuigen;
+    voertuigen.push_back(VoertuigInfo("Baan1", "bus", 10));
+
+    vector<VoertuiggeneratorInfo> generatoren;
+
+    vector<BushalteInfo> bushaltes;
+    bushaltes.push_back(BushalteInfo("Baan1", 60, 10));
+
+    Verkeerssimulatie verkeerssimulatie(banen, lichten, voertuigen, generatoren, bushaltes);
+
+    OurTestingUtils::testSimulatie(verkeerssimulatie, 40, 1, "output_tests/BushalteTestOutput.txt", "output_tests/BushalteTestExpectedOutput.txt");
 }

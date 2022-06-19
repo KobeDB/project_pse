@@ -1,1 +1,1 @@
-VOERTUIGGENERATOR:FREQUENTIE is geen getal
+Bushalte not on road

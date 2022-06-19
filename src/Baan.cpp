@@ -165,12 +165,28 @@ void Baan::teken(std::ostream& os) const {
     for(int i = verkeerslichtenStr.size(); i < width; i++) { os << " "; }
     os << "| ";
     baanPos = 0;
+    // volgendeBushalte variabele nodig om het streepje '|' te tekenen
+    std::vector<Bushalte>::const_iterator volgendeBushalte = bushaltes.empty()? bushaltes.end() : bushaltes.begin();
     for(std::vector<Verkeerslicht*>::size_type i = 0; i < verkeerslichten.size(); i++) {
         const Verkeerslicht& verkeerslicht = verkeerslichten[i];
+
+        if(volgendeBushalte != bushaltes.end() && volgendeBushalte->getPositie() < verkeerslicht.getPositie()) {
+            for(; baanPos < volgendeBushalte->getPositie(); baanPos++) {
+                os << " ";
+            }
+            os << "|";
+            volgendeBushalte++;
+        }
         for(; baanPos < verkeerslicht.getPositie(); baanPos++) {
             os << " ";
         }
         os << (verkeerslicht.isRood()? "R" : "G");
+    }
+    for(;volgendeBushalte != bushaltes.end(); volgendeBushalte++) {
+        for(; baanPos < volgendeBushalte->getPositie(); baanPos++) {
+            os << " ";
+        }
+        os << "|";
     }
 
     os << "\n";
