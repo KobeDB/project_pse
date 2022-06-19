@@ -22,19 +22,22 @@ int main() {
     std::cout << "SIMULATIE: \n";
     std::cout << simulatie << "\n";
     std::ofstream grafischeImpressie("grafische_impressie.txt");
-    float time = 0;
-    for(int i = 0; i < 10000; i++) { // We stoppen na 100 updates als simulatie blijft hangen
 
-        float deltaTime_s = 0.016;
+    float tick = 0;
+    const float deltaTime_s = 0.016;
+    for(float time_s = 0; time_s < 100; time_s += deltaTime_s) { // We stoppen na 100 updates als simulatie blijft hangen
+
 //        usleep((int)(deltaTime_s * 1000)); // usleep uses microseconds, adjust scaling factor to let the simulation-'seconds' tick faster
-        time += deltaTime_s;
+
         simulatie.update(deltaTime_s);
-        if(simulatie.done())
-            break;
+//        if(simulatie.done())
+//            break;
 
         // Print de situatie af om de zoveel stappen
-        if(i%100 == 0) {
-            std::cout << "\tTijd: " << time << "\n";
+        tick += deltaTime_s;
+        if(tick > 1) {
+            tick = 0;
+            std::cout << "\tTijd: " << time_s << "\n";
             simulatie.teken(cout);
             simulatie.teken(grafischeImpressie);
         }

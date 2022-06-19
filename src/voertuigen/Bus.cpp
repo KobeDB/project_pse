@@ -13,12 +13,12 @@ void Bus::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *
         if(resterendeWachttijd <= 0) {
             if(!bushalte) std::cerr << "Wachtende bus heeft geen bushalte! Los uw bugs op, idioot!!";
             bushalte->toegekendeBus = NULL;
-            this->positie += 5.0f; // beweeg genoeg voorbij de bushalte om te vermijden dat we deze bus terug aan dezelfde bushalte toekennen
+            prevBushalte = bushalte; // Onthouden welke bushalte we net verlaten zijn, zodat we de volgende update niet terug zouden stoppen
         }
         return;
     }
 
-    if(!bushalte) {
+    if(!bushalte || bushalte == prevBushalte) {
         // Geen bushalte --> gewoon volgen
         Voertuig::update(deltaTime_s, licht, voorligger, bushalte);
         return;

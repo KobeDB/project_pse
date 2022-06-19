@@ -9,6 +9,7 @@
 
 class Bus : public Voertuig {
     float resterendeWachttijd;
+    void* prevBushalte;
 public:
     virtual float get_V_MAX() const { return 11.4f; }
     virtual float get_VERTRAAGFACTOR() const { return 0.4f; }
@@ -28,7 +29,7 @@ public:
 //    virtual int get_MINIMALE_VOLGAFSTAND() const {return 4;}
 //    virtual int get_VOERTUIG_LENGTE() const {return 4;}
 
-    Bus(const std::string& baanNaam, int positie) : Voertuig(baanNaam, positie), resterendeWachttijd(0.0f) {}
+    Bus(const std::string& baanNaam, int positie) : Voertuig(baanNaam, positie), resterendeWachttijd(0.0f), prevBushalte(NULL) {}
 
     void update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger, Bushalte* bushalte);
 

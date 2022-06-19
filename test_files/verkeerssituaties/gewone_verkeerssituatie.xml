@@ -22,13 +22,13 @@
     <VOERTUIGGENERATOR>
         <baan>Middelheimlaan</baan>
         <type>bus</type>
-        <frequentie>5</frequentie>
+        <frequentie>20</frequentie>
     </VOERTUIGGENERATOR>
 
     <BUSHALTE>
         <baan>Middelheimlaan</baan>
-        <positie> 80 </positie>
-        <wachttijd> 20 </wachttijd>
+        <positie> 40 </positie>
+        <wachttijd> 4 </wachttijd>
     </BUSHALTE>
 
 </VERKEERSSITUATIE>
