@@ -42,25 +42,29 @@ Voertuig* VoertuigFactory::create(const std::string& voertuigType, const std::st
 {
     REQUIRE(positie >= 0, "positie moet >=0");
 
+    Voertuig* result = NULL;
+
     if(voertuigType == "auto") {
-        return new Auto(baanNaam, positie);
+        result = new Auto(baanNaam, positie);
     }
     if(voertuigType == "bus") {
-        return new Bus(baanNaam, positie);
+        result = new Bus(baanNaam, positie);
     }
     if(voertuigType == "politiecombi") {
-        return new Politiecombi(baanNaam, positie);
+        result = new Politiecombi(baanNaam, positie);
     }
     if(voertuigType == "ziekenwagen") {
-        return new Ziekenwagen(baanNaam, positie);
+        result = new Ziekenwagen(baanNaam, positie);
     }
     if(voertuigType == "brandweerwagen") {
-        return new Brandweerwagen(baanNaam, positie);
+        result = new Brandweerwagen(baanNaam, positie);
     }
 
-    std::cerr << "Factory create: niet bestaand Voertuigtype: " << voertuigType << "\n";
+    if(result == NULL) {
+        std::cerr << "Factory create: niet bestaand Voertuigtype: " << voertuigType << "\n";
+    }
 
-    ENSURE(!isValidType(voertuigType), "Voertuig met geldig type niet geconstrueerd!");
+    ENSURE(isValidType(voertuigType)? result != NULL && result->getType() == voertuigType : result == NULL, "Indien het voertuigType bestaat, is er een instantie van dat type gemaakt");
 
-    return NULL;
+    return result;
 }

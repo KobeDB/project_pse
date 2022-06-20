@@ -28,6 +28,8 @@ private:
 public:
     bool isValidType(const std::string& voertuigType) const;
 
+    // REQUIRE(positie >= 0, "positie moet >=0")
+    // ENSURE(isValidType(voertuigType)? result != NULL && result->getType() == voertuigType : result == NULL, "Indien het voertuigType bestaat, is er een instantie van dat type gemaakt");
     Voertuig* create(const std::string& voertuigType, const std::string& baanNaam, int positie);
 
 };

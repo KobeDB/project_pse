@@ -14,7 +14,7 @@ Verkeerslicht::Verkeerslicht(const std::string& baan, int positie, int cyclus): 
 {
     REQUIRE(positie >= 0, "positie mag niet negatief zijn");
     REQUIRE(cyclus > 0, "cyclus mag niet 0 of negatief zijn");
-    REQUIRE(timer_s == 0, "timer niet geinitialiseerd op 0");
+    ENSURE(timer_s == 0, "timer moet geinitialiseerd staan op 0");
     REQUIRE(!baan.empty(), "baanNaam mag niet leeg zijn");
 }
 

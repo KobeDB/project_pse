@@ -78,11 +78,11 @@ private:
     void checkConsistency(std::ostream& errstr);
 
 public:
-    const std::vector<BaanInfo>& getBanen() {return banen;}
-    const std::vector<VerkeerslichtInfo>& getVerkeerslichten() {return verkeerslichten;}
-    const std::vector<VoertuigInfo>& getVoertuigen() {return voertuigen;}
-    const std::vector<VoertuiggeneratorInfo>& getVoertuiggeneratoren() {return Generatoren;}
-    const std::vector<BushalteInfo>& getBushaltes() {return bushaltes;}
+    const std::vector<BaanInfo>& getBanen() const {return banen;}
+    const std::vector<VerkeerslichtInfo>& getVerkeerslichten() const {return verkeerslichten;}
+    const std::vector<VoertuigInfo>& getVoertuigen() const {return voertuigen;}
+    const std::vector<VoertuiggeneratorInfo>& getVoertuiggeneratoren() const {return Generatoren;}
+    const std::vector<BushalteInfo>& getBushaltes() const {return bushaltes;}
 };
 
 

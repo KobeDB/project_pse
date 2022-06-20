@@ -19,7 +19,7 @@ void Bus::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *
     }
 
     if(!bushalte || bushalte == prevBushalte) {
-        // Geen bushalte --> gewoon volgen
+        // Geen bushalte => gewoon volgen
         Voertuig::update(deltaTime_s, licht, voorligger, bushalte);
         return;
     }
@@ -27,16 +27,16 @@ void Bus::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *
     // Deze bus nadert wel een bushalte
 
     if(bushalte->toegekendeBus != this && bushalte->toegekendeBus != NULL) {
-        // De bus is niet de eerste bus voor de halte --> gewoon volgen
+        // De bus is niet de eerste bus voor de halte => gewoon volgen
         Voertuig::update(deltaTime_s, licht, voorligger, bushalte);
         return;
     }
 
-    // De bus is wel de eerste bus voor de halte --> desnoods vertragen of stoppen
+    // De bus is wel de eerste bus voor de halte => desnoods vertragen of stoppen
     bushalte->toegekendeBus = this;
     if(abs(bushalte->getPositie()-this->getPositie()) < get_VERTRAAGAFSTAND()) {
         updatePositieEnSnelheid(deltaTime_s);
-        updateVersnelling(NULL); // negeer de voorligger --> NULL meegeven
+        updateVersnelling(NULL); // negeer de voorligger => NULL meegeven
         if(abs(bushalte->getPositie()-this->getPositie()) < get_STOPAFSTAND()) {
             // laat voertuig stoppen
             stop();
@@ -51,7 +51,7 @@ void Bus::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *
         }
     }
     else {
-        // De bus hoeft niet te vertragen of te stoppen --> gewoon volgen
+        // De bus hoeft niet te vertragen of te stoppen => gewoon volgen
         Voertuig::update(deltaTime_s, licht, voorligger, bushalte);
         return;
     }

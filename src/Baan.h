@@ -23,7 +23,12 @@ private:
     std::vector<Voertuig*> voertuigen;
     std::vector<Bushalte> bushaltes;
 public:
-    Baan() : naam(), lengte() {}
+    Baan(); // Dit bestaat enkel en alleen om banen te kunnen opslaan in de STL containers
+
+    // REQUIRE(!naam.empty(), "baannaam mag niet leeg zijn");
+    // REQUIRE(lengte > 0, "lengte moet groter zijn dan 0");
+    // ENSURE(getLengte() == lengte, "lengte is goed geinitialiseerd");
+    // ENSURE(getNaam() == naam, "naam is goed geinitialiseerd");
     Baan(const std::string& naam, int lengte);
 
     Baan(const Baan& other);
@@ -31,6 +36,7 @@ public:
     // Baan destructor delete elk voertuig
     ~Baan();
 
+    // REQUIRE(deltaTime_s >= 0, "deltaTime_s is een positief getal");
     void update(float deltaTime_s);
 
     bool done() const;

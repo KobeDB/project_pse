@@ -7,10 +7,18 @@
 #include "voertuigen/Voertuig.h"
 #include "VoertuigFactory.h"
 
+Baan::Baan() : naam(), lengte()
+{
+    ENSURE(verkeerslichten.empty() && voertuigen.empty() && bushaltes.empty(), "De baan moet leeg zijn");
+}
+
 Baan::Baan(const std::string& naam, int lengte) : naam(naam), lengte(lengte)
 {
     REQUIRE(!naam.empty(), "baannaam mag niet leeg zijn");
     REQUIRE(lengte > 0, "lengte moet groter zijn dan 0");
+    ENSURE(getLengte() == lengte, "lengte is goed geinitialiseerd");
+    ENSURE(getNaam() == naam, "naam is goed geinitialiseerd");
+    ENSURE(verkeerslichten.empty() && voertuigen.empty() && bushaltes.empty(), "De baan moet leeg zijn");
 }
 
 Baan::~Baan() {
@@ -117,6 +125,8 @@ const Voertuig* Baan::getAchtersteVoertuig() const {
 
 void Baan::update(float deltaTime_s)
 {
+    REQUIRE(deltaTime_s >= 0, "deltaTime_s is een positief getal");
+
     for(unsigned i = 0; i < verkeerslichten.size(); i++) {
         Verkeerslicht& licht = verkeerslichten[i];
         licht.update(deltaTime_s);

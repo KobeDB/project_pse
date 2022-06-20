@@ -14,10 +14,13 @@ using namespace std;
 
 Voertuig_generator::Voertuig_generator(const std::string &baan, const std::string &type, int cyclus) : baanNaam(baan),
                                                                                                        type(type),
-                                                                                                       cyclus(cyclus) {
+                                                                                                       cyclus(cyclus),
+                                                                                                       timer_s(0) {
     REQUIRE(cyclus > 0, "cyclus mag niet 0 of negatief zijn");
     REQUIRE(!baan.empty(), "baanNaam mag niet leeg zijn");
     REQUIRE(!type.empty(), "type mag niet leeg zijn");
+    ENSURE(getCyclus() == cyclus, "cyclus is goed geinitialiseerd");
+    ENSURE(getTimer_s() == 0, "getTimer_s() staat op 0");
 }
 
 
@@ -32,6 +35,8 @@ const std::string &Voertuig_generator::getType() const {
 int Voertuig_generator::getCyclus() const {
     return cyclus;
 }
+
+float Voertuig_generator::getTimer_s() const { return timer_s; }
 
 void Voertuig_generator::update(float deltaTime_s, Baan* baan) {
     // Variabelen voor de ENSURE
