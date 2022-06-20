@@ -170,7 +170,7 @@ void Baan::teken(std::ostream& os) const {
     for(std::vector<Verkeerslicht*>::size_type i = 0; i < verkeerslichten.size(); i++) {
         const Verkeerslicht& verkeerslicht = verkeerslichten[i];
 
-        if(volgendeBushalte != bushaltes.end() && volgendeBushalte->getPositie() < verkeerslicht.getPositie()) {
+        while(volgendeBushalte != bushaltes.end() && volgendeBushalte->getPositie() < verkeerslicht.getPositie()) {
             for(; baanPos < volgendeBushalte->getPositie(); baanPos++) {
                 os << " ";
             }

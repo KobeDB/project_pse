@@ -31,4 +31,10 @@
         <wachttijd> 4 </wachttijd>
     </BUSHALTE>
 
+    <BUSHALTE>
+        <baan>Middelheimlaan</baan>
+        <positie> 90 </positie>
+        <wachttijd> 4 </wachttijd>
+    </BUSHALTE>
+
 </VERKEERSSITUATIE>
