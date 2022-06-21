@@ -10,7 +10,6 @@
 class Politiecombi : public Prioriteitsvoertuig {
 
 public:
-    //TODO: deze constantes aanpassen
     virtual float get_V_MAX() const { return 17.2f; }
     virtual float get_VERTRAAGFACTOR() const { return 0.4f; }
     virtual float get_REMFACTOR_MAX() const {return 4.92f;}

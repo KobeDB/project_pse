@@ -6,6 +6,8 @@
 
 
 void Prioriteitsvoertuig::update(float deltaTime_s, const Verkeerslicht *licht, const Voertuig *voorligger, Bushalte* bushalte) {
+    REQUIRE(deltaTime_s >= 0, "deltaTime_s mag niet negatief zijn");
+
     float old_positie = (float)getPositie();
 
     updatePositieEnSnelheid(deltaTime_s);

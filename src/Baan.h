@@ -44,20 +44,27 @@ public:
     const std::string& getNaam() const {return naam;}
     int getLengte() const {return lengte;}
 
+    // REQUIRE(pos >= 0, "pos mag niet negatief zijn");
+    // ENSURE(returnval == NULL || pos < returnval->getPositie(), "POST: returnval is geen voorligger")
     const Verkeerslicht* getVolgendeLicht(int pos) const;
 
+    // REQUIRE(pos >= 0, "pos mag niet negatief zijn");
+    // ENSURE(returnval == NULL || pos < returnval->getPositie(), "POST: returnval is geen voorligger")
     Bushalte* getVolgendeBushalte(int pos);
 
     /*
-     * POST: returnt het voertuig dat net voor pos rijdt. als er geen voorligger is, returnt NULL
+     * REQUIRE(pos >= 0, "pos mag niet negatief zijn");
      * ENSURE(returnval == NULL || pos < returnval->getPositie(), "POST: returnval is geen voorligger")
      */
     const Voertuig* getVoorligger(int pos) const;
+
     const Voertuig* getAchtersteVoertuig() const;
 
     int getVoertuigenAmt() const { return voertuigen.size(); }
 
     void addVerkeerslicht(const Verkeerslicht& licht);
+
+    //REQUIRE(voertuig != null, "voertuig mag niet null zijn")
     void addVoertuig(Voertuig* voertuig);
     void addBushalte(Bushalte bushalte);
 
