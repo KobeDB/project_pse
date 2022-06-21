@@ -1,0 +1,1 @@
+ERROR: BUSHALTE:POSITIE is geen getal

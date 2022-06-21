@@ -1,0 +1,1 @@
+ERROR: VOERTUIG:TYPE is geen valide type
